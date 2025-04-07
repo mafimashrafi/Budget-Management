@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Management</title>
+</head>
+<body>
+    <h1>This is the home page of our project</h1>
+    <!-- dynamically creating buttons -->
+    <% allowedPages.forEach((page, index) => { %>
+        <form action="/<%= page %>" method="get" style="margin-bottom: 10px;">
+            <button type="submit" class="<%= page %>"> Go to <%= page.charAt(0).toUpperCase() + page.slice(1) %></button>
+        </form>
+    <% }); %>
+</body>
+</html>
