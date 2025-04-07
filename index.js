@@ -13,10 +13,10 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 const allowedPages=['savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency',
-    'transactionHst'];
+    'transactionHst', 'billReminder'];
 
 app.get('/', (req, res) =>{
-
+    // using global pages array
     res.render("index.ejs", {allowedPages});
 });
 
@@ -24,7 +24,7 @@ app.get('/', (req, res) =>{
 app.get("/:page", (req, res)=>{
     const page=req.params.page;
 
-    // const allowedPages=['savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency'];
+   //using global pages array
     try{
         if(allowedPages.includes(page)){
             res.render(page);
