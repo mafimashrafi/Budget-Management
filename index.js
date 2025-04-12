@@ -12,8 +12,8 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const allowedPages=['savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency',
-    'transactionHst', 'billReminder'];
+const allowedPages=['userProfile', 'login', 'register','savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency',
+    'transactionHst', 'billReminder', 'emergency', 'exportData', 'investmentTracker', 'recurringtransaction', 'report', 'subscriptions', 'suggestions'];
 
 app.get('/', (req, res) =>{
     // using global pages array
