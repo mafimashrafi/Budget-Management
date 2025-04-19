@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Budget Management</title>
+</head>
+<body>
+    <h1>From here user will register or log in</h1>
+    <div>
+        <% coverPages.forEach((page, index) => { %>
+            <form action="/<%= page %>" method="get" style="margin-bottom: 10px;">
+                <button type="submit" class="<%= page %>"> <%= page.charAt(0).toUpperCase() + page.slice(1) %></button>
+            </form>
+        <% }); %>
+    </div>
+</body>
+</html>

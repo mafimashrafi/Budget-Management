@@ -2,9 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const path = require("path");
+const bcrypt = require("bcrypt");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const UserS = require("./models/user.js"); // Import the Listing model
+const User = require("./models/user.js"); // Import the Listing model
 
 const port = 8080;
 
@@ -15,8 +16,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(express.urlencoded({extended: true}));
-// app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.use(methodOverride("_method"));
 
 //connection local mongodb
@@ -32,12 +33,15 @@ async function main(){
 };
 
 
-const allowedPages=['userProfile', 'login', 'savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency',
+const allowedPages=['userProfile', 'login', 'register', 'savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency',
     'transactionHst', 'billReminder', 'emergency', 'exportData', 'investmentTracker', 'recurringtransaction', 'report', 'subscriptions', 'suggestions'];
+
+
+const coverPages = ['login', 'register'];
 
 app.get('/', (req, res) =>{
     // using global pages array
-    res.render("login.ejs");
+    res.render("cover.ejs", {coverPages});
 });
 
 //home page
@@ -62,9 +66,37 @@ app.get("/:page", (req, res)=>{
     }
 });
 
-//creat new account/register
-app.get('/register', async(req, res)=>{
-    res.render('register.ejs');
+//creating users
+app.post("/register", async (req, res) =>{
+    const {username, email, password, confirmPassword, phoneNumber} = req.body;
+    // console.log(password, req.body.confirmPassword);
+
+    if(password !== confirmPassword){
+        console.log("Password do not match");
+        return res.render("register.ejs", {error: "Password do not match", username, email, phoneNumber})
+    };
+
+    const existingUser = await User.findOne({email});
+    if(existingUser){
+        // console.log("Email already exists");
+        return res.render("register.ejs", {error: "Email already exists", username, email, phoneNumber})
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+        name: username,
+        email: email,
+        password: hashPassword,
+        phoneNumber: phoneNumber,
+        createdAt:new Date(),
+    });
+    newUser.save().then(() =>{
+        console.log("user created successfully");
+        res.redirect("/home");
+    }).catch((err)=>{
+        console.log(err);
+        res.render("register.ejs", {error: "Error creating user", username, email, phoneNumber});
+    });
 });
 
 app.listen(port, () =>{
