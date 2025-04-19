@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removing Account</title>
+</head>
+<body>
+    <h3>Please enter this informations to delete your account</h3>
+    <form method="post" action="/delete/<%=user._id%>?_method=delete">
+        <label for="email">Email:</label></br>
+        <input type="email"  name="email" placeholder="Enter your mail"></br></br>
+
+        <label for="password">Password</label></br>
+        <input name="password" type="password" placeholder="Enter your password"></br></br>
+
+        <button type="submit">Delete</button>
+    </form>
+</body>
+</html>

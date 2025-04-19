@@ -13,7 +13,7 @@
             <button type="submit" class="<%= page %>"> Go to <%= page.charAt(0).toUpperCase() + page.slice(1) %></button>
         </form>
     <% }); %>
-    <form action="/" method="get">
+    <form action="/logout" method="post">
         <button type="submit" class="home">Log Out</button>
     </form>
 </body>

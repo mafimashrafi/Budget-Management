@@ -6,11 +6,23 @@
     <title>BM: Login</title>
 </head>
 <body>
-    <h1>This is login page</h1>
-    <div>
-        <form action="/home" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
-    </div>
+    <h1>Please, Give apropriate info to get logged in</h1>
+    <form action="/login" method="POST">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label> <br>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="phoneNumber">Phone:</label>  <br>  
+        <input id="phone" name="phoneNumber" required><br><br>
+
+        <button Type="submit">Sign in</button>
+
+        <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+          <% } %>
+
+    </form>
 </body>
 </html>

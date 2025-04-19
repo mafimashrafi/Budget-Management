@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BM: user Profile</title>
+    <title>BM: <%=user.name%>'s Profile</title>
 </head>
 <body>
-    <h1>User can check and edit their profile</h1>
+    <h3>Welcome to <%=user.name%>'s profile</h3>
+    <div class="personalInfo">
+        <div id="name"><p>Name: <b><%=user.name%></b></p></div>
+        <div id="emai"><p>Email: <b><%=user.email%></b></p></div>
+        <div id="phone"><p>Phone: <b><%=user.phoneNumber%></b></p></div>
+        <div id="userIMG"><img src="<%=user.image%> alt="User profile"></div>
+    </div>
     <div>
         <form action="/home" method="get">
-            <button type="submit" class="home">Home</button>
+            <button type="submit" class="home">Close</button>
+        </form>
+    </div>
+    <div id="delete">
+        <form method="get" action="/delete/<%=user._id%>">
+            <button type="submit">Delete your profile</button>
         </form>
     </div>
 </body>

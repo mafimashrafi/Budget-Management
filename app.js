@@ -5,12 +5,13 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const User = require("./models/user.js"); // Import the Listing model
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
-const port = 8080;
+//requiring models
+const User = require("./models/user.js"); 
+const verfyUser = require("./middlewares/authMiddleware.js");
 
-//app.use(express.urlencoded({extended: true}));
-// app.use(express.json);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -19,6 +20,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride("_method"));
+app.use(cookieParser());
+
+
+const port = 8080;
 
 //connection local mongodb
 main()
@@ -33,71 +38,43 @@ async function main(){
 };
 
 
-const allowedPages=['userProfile', 'login', 'register', 'savingsGoal', 'budget', 'transaction', 'incomeCategory', 'expenseCategory', 'dashboard', 'taxCalculation', 'multiCurrency',
-    'transactionHst', 'billReminder', 'emergency', 'exportData', 'investmentTracker', 'recurringtransaction', 'report', 'subscriptions', 'suggestions'];
+const allowedPages=[
+    'userProfile', 
+    'savingsGoal',
+    'budget', 'transaction', 
+    'incomeCategory', 'expenseCategory',
+    'dashboard', 'taxCalculation',
+    'multiCurrency',
+    'transactionHst', 'billReminder', 
+    'emergency', 'exportData', 
+    'investmentTracker', 'recurringtransaction', 
+    'report', 'subscriptions', 'suggestions'];
 
 
 const coverPages = ['login', 'register'];
 
+//cover page
 app.get('/', (req, res) =>{
     // using global pages array
     res.render("cover.ejs", {coverPages});
 });
 
 //home page
-app.get('/home', (req, res) =>{
+app.get('/home', verfyUser, (req, res) =>{
     res.render("home.ejs", {allowedPages});
 });
 
-//handling in dynamic way
-app.get("/:page", (req, res)=>{
-    const page=req.params.page;
+//requiring route
+const registerRoute = require("./routes/registerRoute.js");
+const profileRoute = require("./routes/profileRoute.js");
+const loginRoute = require("./routes/loginRoute.js");
+const suggestionRoute = require("./routes/suggestionRoute.js");
 
-   //using global pages array
-    try{
-        if(allowedPages.includes(page)){
-            res.render(page);
-        }else{
-            throw new Error("404; error. page not found");
-        }
-    }catch (error){
-        console.error('Error rendering page:', error.message);
-        res.status(404).render('404', { message: `Page "${page}" not found.` });
-    }
-});
+app.use("/", registerRoute); // Use the register route
+app.use("/", loginRoute); // Use the login route
+app.use("/", profileRoute);
+app.use("/", suggestionRoute);
 
-//creating users
-app.post("/register", async (req, res) =>{
-    const {username, email, password, confirmPassword, phoneNumber} = req.body;
-    // console.log(password, req.body.confirmPassword);
-
-    if(password !== confirmPassword){
-        console.log("Password do not match");
-        return res.render("register.ejs", {error: "Password do not match", username, email, phoneNumber})
-    };
-
-    const existingUser = await User.findOne({email});
-    if(existingUser){
-        // console.log("Email already exists");
-        return res.render("register.ejs", {error: "Email already exists", username, email, phoneNumber})
-    }
-
-    const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({
-        name: username,
-        email: email,
-        password: hashPassword,
-        phoneNumber: phoneNumber,
-        createdAt:new Date(),
-    });
-    newUser.save().then(() =>{
-        console.log("user created successfully");
-        res.redirect("/home");
-    }).catch((err)=>{
-        console.log(err);
-        res.render("register.ejs", {error: "Error creating user", username, email, phoneNumber});
-    });
-});
 
 app.listen(port, () =>{
     console.log(`Server is running at port: ${port}`);
