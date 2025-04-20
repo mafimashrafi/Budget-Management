@@ -1,5 +1,21 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-    <h1>Users posts suggestions for others</h1>
-    <label for="suggestionPost">Post your suggestion</label>
+    <h1>Post your suggestion(s) for others</h1>
+    <form  method="post" action="/suggestions/<%=user._id%>/create">
+        <label for="postsgs">Post your suggestion:</label></br>
+        <textarea name="postsgs" row="10" cols="50" maxlength="200"></textarea></br>
+        <button type="submit">Post Suggestion</button>
+    </form>
+    <hr />
+    
+    <h3>Suggestions</h3>
+    <div class="suggestion">
+        <% for(posts of suggestion){%>
+            <div id="post">
+                By: <%=posts.postBy%>
+                (<%=posts.postDate.toString().split(" ")[4]%>)
+                <p><%=posts.post%></p>
+            </div>
+        <%}%>
+    </div>
 </body>

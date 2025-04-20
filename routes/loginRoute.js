@@ -27,6 +27,10 @@ router.post("/login", async (req, res) =>{
         return res.render("login.ejs", {error: "User is not registered"});
     };
 
+    if (!existingUser.isVerified) {
+        return res.render("login.ejs", { error: "Please verify your email first" });
+    };
+      
     const matchPassword = await bcrypt.compare(password, existingUser.password);
     if(!matchPassword){
         return res.render("login.ejs", {error: "wrong password"});

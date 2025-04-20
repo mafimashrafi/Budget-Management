@@ -5,8 +5,10 @@ const bcrypt = require("bcrypt");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const User = require("../models/user.js");
-
+const validator = require("validator");
+const sendVerificationEmail = require("../utils/sendEmail.js");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
@@ -20,6 +22,10 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) =>{
     const {username, email, password, confirmPassword, phoneNumber} = req.body;
     // console.log(password, req.body.confirmPassword);
+
+    if(!validator.isEmail(email)){
+        return res.render("register.ejs", {error: "Invalid email formate"});
+    }
 
     if(password !== confirmPassword){
         return res.render("register.ejs", {error: "Password do not match", username, email, phoneNumber})
@@ -38,6 +44,7 @@ router.post("/register", async (req, res) =>{
         phoneNumber: phoneNumber,
         createdAt:new Date(),
     });
+
     newUser.save().then(() =>{
         console.log("user created successfully");
         res.redirect("/login");
@@ -45,6 +52,28 @@ router.post("/register", async (req, res) =>{
         console.log(err);
         res.render("register.ejs", {error: "Error creating user", username, email, phoneNumber});
     });
+
+    //generating verification token
+    const vtoken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    await sendVerificationEmail(newUser.email, vtoken);
 });
+
+//email verification
+router.get("/verify-email", async (req, res) => {
+    const { vtoken } = req.query;
+    try {
+      const decoded = jwt.verify(vtoken, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return res.render("register.ejs", {error: "User not found"});
+      };
+
+      user.isVerified = true;
+      await user.save();
+  
+    } catch (err) {
+      res.status(400).send("Invalid or expired token");
+    }
+  });
 
 module.exports = router;
