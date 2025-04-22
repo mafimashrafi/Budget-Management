@@ -4,20 +4,20 @@ const router = express.Router();
 const User = require("../models/user.js");
 const Suggestion = require("../models/suggestion.js");
 const { Schema } = mongoose;
-const verfyUser = require("../middlewares/authMiddleware.js");
+const verifyUser = require("../middlewares/authMiddleware.js");
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(express.static("public"));
 
-router.get("/suggestions", verfyUser, async (req, res)=>{
+router.get("/suggestions", verifyUser, async (req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const suggestion = await Suggestion.find({})
     res.render("suggestions.ejs", {user, suggestion});
 });
 
-router.post("/suggestions/:id/create", verfyUser, async (req, res)=>{
+router.post("/suggestions/:id/create", verifyUser, async (req, res)=>{
     const {id} = req.params;
     const user = await User.findById(id);
     const {postsgs} = req.body;

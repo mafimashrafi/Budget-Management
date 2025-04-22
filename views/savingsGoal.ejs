@@ -1,9 +1,87 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h1>This page is for savings goals</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
-    </div>
+    <h4>Lists your saving goals</h4>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding: 8px;
+        }
+    </style>
+    <table border="1">
+        <tr>
+            <th>Saving Source</th>
+            <th>Goal</th>
+            <th>Estimated Amount</th>
+            <th>Saved Amount</th>
+            <th>Target Month</th>
+            <th>Done</th>
+            <th>Edit</th>
+            <th>Delte</th>
+        </tr>
+        <% let targetAmount = 0; %>
+        <% let savedAmount = 0; %>
+        <%for(save of savings){%>
+            <tr>
+                <td><%=save.savingSource%></td>
+                <td><%=save.goals%></td>
+                <td><%=save.estimatedSave%></td>
+                <td><%=save.savedAmount%></td>
+                <td><%=save.targetMonth%></td>
+                <td>
+                    <% if(save.done == true){%>
+                        <input type="checkbox" name="done" value="true" checked>
+                    <%}%>
+                    <% if(save.done != true){%>
+                        <input type="checkbox" name="done" value="true">
+                    <%}%>
+                </td>
+                <td>
+                    <form method="get" action="/savingsGoal/<%=save._id%>/edit">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" action="/savingsGoal/<%=save._id%>/delete">
+                        <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                    </form>
+                </td>
+            </tr>
+            <% targetAmount+=save.estimatedSave %> 
+            <% savedAmount+=save.savedAmount %>
+        <%}%>
+    </table>
+    <p> Targeted Amount: <%=targetAmount%></p>
+    <p> Saved Amount: <%=savedAmount%></p>
+    <% if(savedAmount > targetAmount){%>
+        <p>Extra saved: <%=savedAmount - targetAmount%></p>
+    <%}%>
+    <% if(savedAmount < targetAmount){%>
+        <p>Failed to save: <%=targetAmount - savedAmount %></p>
+    <%}%>
+    <% if(error){%>
+        <p style="color:red;"><%= error %></p>
+    <%}%>
+
+    <hr />
+    <form method="post" action="/savingsGoal/<%=user._id%>/add">
+        <labe for="savingSource">From where do you want to save?</labe></br>
+        <textarea name="savingSource" rows="0" cols="50"></textarea></br></br>
+        <label for="goal">Describe your goal to save money</label></br>
+        <textarea name="goal" maxlength="200" cols="50" required></textarea></br></br>
+        <label for="estimatedSave">Estimate the amount you can save</label></br>
+        <input type="number" name="estimatedSave" min="0" step="0.0001"></br></br>
+        <labe for="savedAmount">The amount you could save at the end:</labe></br>
+        <input type="number" name="savedAmount" min="0" step="0.0001"></br></br>
+        <labe for="targetMonth">Target Month</labe></br>
+        <input type="text" name="targetMonth"></br></br>
+        <label for="done">Done: </label>
+        <input type="checkbox" name="done" value="true"></br></br>
+
+        <button type="submit">Add</button>
+    </form>
+    <% if(error){%>
+        <p style="color:red;"><%= error %></p>
+    <%}%>
 </body>

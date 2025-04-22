@@ -70,12 +70,14 @@ const profileRoute = require("./routes/profileRoute.js");
 const loginRoute = require("./routes/loginRoute.js");
 const suggestionRoute = require("./routes/suggestionRoute.js");
 const budgetRoute = require("./routes/budgetRoute.js");
+const savingGoalsRoute = require("./routes/savingGoalsRoute.js");
 
 app.use("/", registerRoute); // Use the register route
 app.use("/", loginRoute); // Use the login route
 app.use("/", profileRoute);
 app.use("/", suggestionRoute);
 app.use("/", budgetRoute);
+app.use("/", savingGoalsRoute);
 
 
 app.listen(port, () =>{

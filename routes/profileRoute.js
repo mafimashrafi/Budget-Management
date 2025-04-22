@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
 const { Schema } = mongoose;
-const verfyUser = require("../middlewares/authMiddleware.js");
+const verifyUser = require("../middlewares/authMiddleware.js");
 const bcrypt = require("bcrypt");
 
 router.use(express.urlencoded({ extended: true }));
@@ -11,7 +11,7 @@ router.use(express.json());
 router.use(express.static("public"));
 
 
-router.get("/userProfile", verfyUser, async (req, res) => {
+router.get("/userProfile", verifyUser, async (req, res) => {
     const userID = req.userID;
 
     try{

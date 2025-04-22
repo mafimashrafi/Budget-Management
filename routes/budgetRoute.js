@@ -3,10 +3,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
 const { Schema } = mongoose;
-const verfyUser = require("../middlewares/authMiddleware.js");
+const verifyUser = require("../middlewares/authMiddleware.js");
 const BudgetList = require("../models/budget.js");
 
-router.get("/budget", verfyUser, async(req, res)=>{
+router.get("/budget", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const budgetList = await BudgetList.find({userId: userID});
@@ -15,7 +15,7 @@ router.get("/budget", verfyUser, async(req, res)=>{
 });
 
 //creat budget
-router.post("/budget/:id/add", verfyUser, async(req, res)=>{
+router.post("/budget/:id/add", verifyUser, async(req, res)=>{
     const {id} = req.params;
     const {todo, budget} = req.body;
     const user = await User.findById(id);
@@ -35,7 +35,7 @@ router.post("/budget/:id/add", verfyUser, async(req, res)=>{
 });
 
 //delete route
-router.delete("/budget/:id/delete", verfyUser, async(req, res)=>{
+router.delete("/budget/:id/delete", verifyUser, async(req, res)=>{
     const {id} = req.params;
     await BudgetList.findByIdAndDelete(id).then(()=>{
         res.redirect("/budget");
