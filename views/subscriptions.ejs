@@ -1,10 +1,36 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/subscription.css">
 <body>
-    <h1>Users keeps their subscription details here</h1>
-    <p>sometimes autorenewal</p>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
+    <h1>My Subscriptions & History</h1>
+
+    <button id="show-form-btn">Add</button>
+    <hr />
+    <div class="addingSub">
+        <form id="add-form" class="hidden" method="POST" action="/subscriptions/<%=user._id%>/add">
+            <label for="subscriptionName">Name of the subscription</label></br>
+            <textarea name="subscriptionName" rows="0" cols="50" maxlength="200"></textarea></br></br>
+            <label for="subscriptionType" required>Select a subscription type:</label></br>
+            <select name="subscriptionType" required>
+                <option value="Monthly">Monthly</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Tri-Monthly">Tri-Monthly</option>
+                <option value="Yearly">Yearly</option>
+            </select></br></br>
+            <label for="subscriptionFee">Subscription Fee</label></br>
+            <input type="number" name="subscriptionFee" min="0" step="0.001"></br></br>
+            <label for="startingDate">Started from (write in this format DD-MM-YYYY)</label></br>
+            <input type="text" name="startingDate" placeholder="DD-MM-YYYY" required></br></br>
+            <button type="submit">Submit</button>
         </form>
     </div>
+
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
+    
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>

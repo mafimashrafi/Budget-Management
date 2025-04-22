@@ -72,6 +72,7 @@ const suggestionRoute = require("./routes/suggestionRoute.js");
 const budgetRoute = require("./routes/budgetRoute.js");
 const savingGoalsRoute = require("./routes/savingGoalsRoute.js");
 const multiCurrency = require("./routes/multicurrencyRoute.js");
+const subscriptions = require("./routes/subscriptionRoute.js");
 
 app.use("/", registerRoute); // Use the register route
 app.use("/", loginRoute); // Use the login route
@@ -80,6 +81,7 @@ app.use("/", suggestionRoute);
 app.use("/", budgetRoute);
 app.use("/", savingGoalsRoute);
 app.use("/", multiCurrency);
+app.use("/", subscriptions);
 
 
 app.listen(port, () =>{

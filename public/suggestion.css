@@ -41,7 +41,7 @@ body {
 
     textarea {
         width: 400px;
-        height: 200px;
+        height: 100px;
         padding: 1rem;
         border: none;
         border-radius: 15px;
@@ -96,3 +96,13 @@ body {
         text-align: center;
         margin-bottom: 1rem;
     }
+
+    .hidden {
+      display: none;
+    }
+
+    #show-form-btn {
+      display: block;
+      margin: 1rem auto; /* Center horizontally and add spacing */
+      text-align: center;
+  }
