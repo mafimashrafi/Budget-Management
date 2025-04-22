@@ -1,9 +1,44 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/multicurrency.css">
 <body>
-    <h1>See your overall act in another currency</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
+    <div class="container">
+      <h1>Currency Converter</h1>
+  
+      <form action="/multicurrency/convert" method="POST">
+        <input type="number" name="amount" step="0.01" required placeholder="Amount">
+  
+        <select name="from" required>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="INR">INR</option>
+            <option value="GBP">GBP</option>
+            <option value="BDT">BDT (Bangladeshi Taka)</option>
+            <option value="SAR">SAR (Saudi Riyal)</option>
+            <option value="KWD">KWD (Kuwaiti Dinar)</option>
+            <option value="AED">AED (UAE Dirham)</option>
+            <option value="SGD">SGD (Singapore Dollar)</option>
+        </select>
+  
+        <span>→</span>
+  
+        <select name="to" required>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="INR">INR</option>
+          <option value="GBP">GBP</option>
+          <option value="BDT">BDT (Bangladeshi Taka)</option>
+          <option value="SAR">SAR (Saudi Riyal)</option>
+          <option value="KWD">KWD (Kuwaiti Dinar)</option>
+          <option value="AED">AED (UAE Dirham)</option>
+          <option value="SGD">SGD (Singapore Dollar)</option>
+        </select>
+  
+        <button type="submit">Convert</button>
+      </form>
+  
+      <% if (result) { %>
+        <h2><%= result %></h2>
+      <% } %>
     </div>
-</body>
+  </body>
+  

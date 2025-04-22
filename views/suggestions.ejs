@@ -1,7 +1,8 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/suggestion.css">
 <body>
     <h1>Post your suggestion(s) for others</h1>
-    <form  method="post" action="/suggestions/<%=user._id%>/create">
+    <form class="creator" method="post" action="/suggestions/<%=user._id%>/create">
         <label for="postsgs">Post your suggestion:</label></br>
         <textarea name="postsgs" row="10" cols="50" maxlength="200"></textarea></br>
         <button type="submit">Post Suggestion</button>
@@ -12,9 +13,9 @@
     <div class="suggestion">
         <% for(posts of suggestion){%>
             <div id="post">
+                <p id="postBody"><%=posts.post%></p>
                 By: <%=posts.postBy%>
                 (<%=posts.postDate.toString().split(" ")[4]%>)
-                <p><%=posts.post%></p>
             </div>
         <%}%>
     </div>
