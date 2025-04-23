@@ -10,7 +10,6 @@ router.get("/subscriptions", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const subscription = await Subscription.find({userID: userID});
-    console.log(subscription);
     res.render("subscriptions.ejs", {error: null, user, subscription});
 });
 
@@ -37,6 +36,19 @@ router.post("/subscriptions/:id/add", verifyUser, async(req, res)=>{
         console.log(err);
         res.render("subscriptions.ejs", {error: 'Failed to add', user, subscription})
     })
+});
+
+//delete route
+router.get("/subscription/:id/delete", verifyUser, async (req, res)=>{
+    const {id} = req.params;
+    const userID = req.userID;
+    const user = await User.findById(userID);
+    const subscription = await Subscription.findById(id);
+    await Subscription.findByIdAndDelete(id).then(()=>{
+        res.redirect("/subscriptions");
+    }).catch((err)=>{
+        res.render("subscriptions.ejs", {error: 'Failed to add', user, subscription});
+    });
 });
 
 module.exports = router;

@@ -1,8 +1,35 @@
 <% layout("/layouts/boilerplate") %>
 <link rel="stylesheet" href="/subscription.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
     <h1>My Subscriptions & History</h1>
-
+    <% if (subscription.length == 0){%>
+        <h4>Your subscription list is empyt</h4>
+        <p>Click on the add button to create your sbscription list</p>
+    <%} else {%>
+        <table bordeer="1">
+            <tr>
+                <th>Subscription</th>
+                <th>Type</th>
+                <th>Subs Fee</th>
+                <th>Started From</th>
+                <th>Remove</th>
+            </tr>
+            <% for(sub of subscription){%>
+                <tr><td><%=sub.subscriptionName%></td>
+                    <td><%=sub.subscriptionType%></td> 
+                    <td><%=sub.subscriptionFee%></td>
+                    <td><%=sub.startingDate.toISOString().split('T')[0]%></td>
+                    <td>
+                        <form method="get" action="/subscription/<%=sub._id%>/delete">
+                            <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+            </table>
+    <%}%>
     <button id="show-form-btn">Add</button>
     <hr />
     <div class="addingSub">
