@@ -1,5 +1,7 @@
 <% layout("/layouts/boilerplate") %>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="/budget.css">
 <body>
     <h3>My budget list</h3>
     <% let totalBudget = 0; %>
@@ -39,12 +41,22 @@
 
     <div class="createBudget">
         <h5>Add new buget in the list</h5>
-        <form method="post" action="budget/<%=user._id%>/add">
-            <textarea name="todo" rows="0" cols="50" maxlength="100"></textarea></br>
+        <button id="show-form-btn">Add</button>
+        <form id="add-form" class="hidden" method="post" action="budget/<%=user._id%>/add">
+            <label for="todo">Budget For</label></br>
+            <textarea name="todo" rows="0" cols="50" maxlength="100"></textarea></br></br>
+            <label for="budget">Budget</label></br>
             <input type="number" name="budget" min="0"  step="0.0001"></br></br>
 
             <button type="submit">Add</button>
         </form>
     </div>
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
     
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>
