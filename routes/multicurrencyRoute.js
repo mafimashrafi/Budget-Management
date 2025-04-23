@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require('axios');
 const verifyUser = require("../middlewares/authMiddleware.js");
 
-const API_KEY = "43890f797f5be77a62b5dcde";
+const API_KEY = process.env.API_KEY;
 
 router.get("/multicurrency", verifyUser, (req, res) =>{
     res.render("multiCurrency.ejs", {result: null});
