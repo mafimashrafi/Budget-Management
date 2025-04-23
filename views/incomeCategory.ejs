@@ -1,9 +1,72 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/incomeCategory.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h1>how many category can be of incomes?</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
-    </div>
+    <h3>Track your income</h3>
+    <% let totalIncome = 0; %>
+    <% let month=['January', "February", 'March', 'April', 'May', 'June',
+        "July", "August", "September", "October", "November", "December"]; %>
+    <% if(incomeCatagory.length == 0){%>
+        <h6>You are yet to add any</h6>
+    <%} else {%>
+        <table border="1">
+            <tr>
+                <th>Reson of cost</th>
+                <th>Earned</th>
+                <th>Month</th>
+                <th>Date</th>
+                <th>Delete</th>
+            </tr>
+            <% for (income of incomeCatagory){%>
+                <% let date = income.date.toISOString().split('T')[0]; %>
+                <tr>
+                    <td><%=income.category%></td>
+                    <td><%=income.earning%></td>
+                    <% totalIncome+=income.earning%>
+                    <% if(income.month in month){%>
+                        <td><%=income.month%></td>
+                    <%} else {%>
+                        <% let monthIDX = Number(date.split(/[ -/:;]/)[1][1]); %>
+                        <td><%=month[monthIDX-1]%></td>
+                    <%}%>
+                    <td><%=income.date.toISOString().split('T')[0]%></td>
+                    <td>
+                        <form method="get" action="/incomeCategory/<%=income._id%>/delete">
+                            <button type="submit">
+                                <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+    </table>
+    <%}%>
+    <p>Total Income: <%=totalIncome%></p>
+    <br>
+    <button id="show-form-btn">Add</button>
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+      <% } %>
+    <hr />
+    <form id="add-form" class="hidden" method="post" action="/incomeCategory/<%=user._id%>/add">
+        <label for="category">Where/How did you spend your money?</label></br>
+        <textarea name="category" rows="0" cols="50" maxlength="200" required></textarea><br><br>
+        <label for="earning">How much did you earn?</label><br>
+        <input type="number" name="earning" min="0" step="0.0001" required><br><br>
+        <label for="inputmonth">Month</label><br>
+        <input type="text" name="inputmonth" rewured><br><br>
+        <labe for="inputDate">Date</labe>
+        <input type="text" name="inputDate" placeholder="DD-MM-YYYY" required></br></br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
+    
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>
