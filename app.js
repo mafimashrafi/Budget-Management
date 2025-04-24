@@ -7,6 +7,9 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const cron = require('node-cron');
+
 
 //requiring models
 const User = require("./models/user.js"); 
@@ -21,6 +24,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 
 const port = 8080;
@@ -34,9 +38,19 @@ main()
     });
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/budgetManagement");
+    await mongoose.connect("mongodb://127.0.0.1:27017/budgetManagement", { useNewUrlParser: true, useUnifiedTopology: true });
 };
 
+cron.schedule('* * * * *', async () => {
+    const now = new Date();
+    const reminders = await Reminder.find({ sent: false, reminderDate: { $lte: now } });
+    
+    for (let reminder of reminders) {
+      await sendEmail(reminder.email, 'Reminder', `Don't forget: ${reminder.task}`);
+      reminder.sent = true;
+      await reminder.save();
+    }
+});
 
 const allowedPages=[
     'userProfile', 
@@ -77,6 +91,7 @@ const expenseCatagory = require("./routes/expenseCategoryRoute.js");
 const incomeCatagory = require("./routes/incomeCategoryRoute.js");
 const emergency = require("./routes/emergencyRoute.js");
 const investmentTracker = require("./routes/investmentTrackerRoute.js");
+const transaction = require("./routes/transactionRoute.js");
 
 app.use("/", registerRoute); 
 app.use("/", loginRoute); 
@@ -90,6 +105,7 @@ app.use("/", expenseCatagory);
 app.use("/", incomeCatagory);
 app.use("/", emergency);
 app.use("/", investmentTracker);
+app.use("/", transaction);
 
 app.listen(port, () =>{
     console.log(`Server is running at port: ${port}`);
