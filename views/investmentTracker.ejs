@@ -4,10 +4,38 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <link rel="stylesheet" href="/investmentTracker.css">
 <body>
     <h3>Track your investment</h3>
+    <% let totalInvestment = 0;%>
     <% if(investments.length == 0){%>
         <h6>Yet to add any</h6>
     <%} else {%>
+        <table border="1">
+            <tr>
+                <th>Investment Detail</th>
+                <th>Investment Type</th>
+                <th>Invested AMount</th>
+                <th>Date</th>
+                <th>Delete</th>
+            </tr>
+            <% for(investment of investments){%>
+                <tr>
+                    <td><%=investment.investmentName%></td>
+                    <td><%=investment.investmentType%></td>
+                    <td><%=investment.investedAmount%></td>
+                    <% totalInvestment+=investment.investedAmount; %>
+                    <td><%=investment.investingDate.toISOString().split('T')[0]%></td>
+                    <td>
+                        <form method="get" action="/investment/<%=investment._id%>/delete">
+                            <button type="submit">
+                                <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+        </table>
     <%}%>
+    <p>Total investment: <%=totalInvestment%></p>
+    <br>
     <button id="show-form-btn">Add</button>
     <hr />
     <form id="add-form" class="hidden" method="post" action="/investment/<%=user._id%>/add">
