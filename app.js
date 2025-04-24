@@ -9,7 +9,8 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cron = require('node-cron');
-
+const sendEmail = require('./utils/emailService');
+const Reminder = require('./models/Reminder');
 
 //requiring models
 const User = require("./models/user.js"); 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 const port = 8080;
@@ -40,6 +42,9 @@ main()
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/budgetManagement", { useNewUrlParser: true, useUnifiedTopology: true });
 };
+
+const billReminder = require("./routes/billReminderRoute.js");
+app.use("/", billReminder);
 
 cron.schedule('* * * * *', async () => {
     const now = new Date();

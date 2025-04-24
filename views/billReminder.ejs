@@ -1,4 +1,12 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/billReminder.css">
 <body>
     <h1>Set reminders for your deu bills</h1>
+
+    <button id="show-form-btn">Add</button>
+    <hr />
+    <form id="add-form" class="hidden" method="post" action="/reminders/:id/add">
+        
+    </form>
+
 </body>
