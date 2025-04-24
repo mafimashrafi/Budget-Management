@@ -76,6 +76,7 @@ const subscriptions = require("./routes/subscriptionRoute.js");
 const expenseCatagory = require("./routes/expenseCategoryRoute.js");
 const incomeCatagory = require("./routes/incomeCategoryRoute.js");
 const emergency = require("./routes/emergencyRoute.js");
+const investmentTracker = require("./routes/investmentTrackerRoute.js");
 
 app.use("/", registerRoute); 
 app.use("/", loginRoute); 
@@ -88,7 +89,7 @@ app.use("/", subscriptions);
 app.use("/", expenseCatagory);
 app.use("/", incomeCatagory);
 app.use("/", emergency);
-
+app.use("/", investmentTracker);
 
 app.listen(port, () =>{
     console.log(`Server is running at port: ${port}`);
