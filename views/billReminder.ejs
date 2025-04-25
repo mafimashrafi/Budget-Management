@@ -1,12 +1,51 @@
 <% layout("/layouts/boilerplate") %>
 <link rel="stylesheet" href="/billReminder.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h1>Set reminders for your deu bills</h1>
+    <h1>Set reminders</h1>
+    <% if (reminders.length == 0){%>
+        <h6>Yet to add any</h6>
+    <%} else {%>
+        <table bordeer="1">
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Remove</th>
+            </tr>
+            <% for(reminder of reminders){%>
+                <tr><td><%=reminder.billToRemind%></td>
+                    <td><%=reminder.reminderDate.toISOString().split('T')[0]%></td>
+                    <td>
+                        <form method="get" action="/reminders/<%= reminder._id %>/delete">
+                            <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+            </table>
+    <%}%>
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
 
     <button id="show-form-btn">Add</button>
-    <hr />
-    <form id="add-form" class="hidden" method="post" action="/reminders/:id/add">
-        
+    <p><%=user._id%></p>
+    <form id="add-form" class="hidden" method="post" action="/reminders/<%= user._id %>/add">
+        <label for="billToRemind">Remeinder</label><br>
+        <textarea name="billToRemind" rows="0" cols="50" maxlength="200" required>
+        </textarea><br><br>
+        <label for="reminderDate">Date of Remeinder (DD-MM-YYYY)</label><br>
+        <input type="text" name="reminderDate" placeholder="DD-MM-YYYY" required>
+        <br><br>
+        <button type="submit">Submit</button>
     </form>
-
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
+    
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>

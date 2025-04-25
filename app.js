@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const sendEmail = require('./utils/emailService');
-const Reminder = require('./models/Reminder');
+const Reminder = require("./models/billreminders.js")
 
 //requiring models
 const User = require("./models/user.js"); 
@@ -40,7 +40,7 @@ main()
     });
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/budgetManagement", { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect("mongodb://127.0.0.1:27017/budgetManagement");
 };
 
 const billReminder = require("./routes/billReminderRoute.js");

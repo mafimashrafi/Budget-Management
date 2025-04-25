@@ -7,14 +7,15 @@ const billReminderSchema = new Schema({
         ref: "User",
         required: true,
     },
-    emaSil: {
-        type: mongoose.Schema.Types.ObjectId,
+    email: {
+        type: String,
         ref: 'User',
         required: true,
     },
     billToRemind: {
         type: String,
         required: true,
+        maxlength: 200,
     },
     reminderDate:{
         type: Date,
