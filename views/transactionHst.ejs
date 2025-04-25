@@ -1,9 +1,23 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/transactionHst.css">
 <body>
-    <h1>Transaction history</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
-    </div>
+    <h3>Monthly Transaction History</h3>
+    <table>
+        <tr>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Total Amount</th>
+        </tr>
+        <%for(History of histories){%>
+            <tr>
+                <td><%=History.year%></td>
+                <td><%=History.month%></td>
+                <td><%=History.total%></td>
+            </tr>
+        <%}%>
+    </table>
+    <hr />
+    <h6>GO BACK TO</h6>
+    <a href="/transaction">Transaction</a><br>
+    <a href="/recurringtransaction">Recurring TRNX</a>
 </body>

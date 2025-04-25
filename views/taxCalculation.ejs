@@ -1,9 +1,64 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/taxCalculation.css">
 <body>
     <h1> Calculate your tax</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
-    </div>
+    <% if(taxProfile.length == 0){%>
+        <h6>Yet to calculate your tax</h6>
+    <%} else {%>
+        <h3>Your Tax: <%=taxProfile[taxProfile.length - 1].calculatedTax%></h3>
+    <%}%>
+    <button id="show-form-btn">Calculate Tax</button>
+    <hr />
+    <form id="add-form" class="hidden" method="post" action="/taxCalculation/<%=user._id%>/calculate">
+        <label for="income">Annual Income</label><br>
+        <input type="number" name="income" placeholder="Annual Income (BDT)" required><br><br>
+
+        <label for="goldValue">Gold Value</label><br>
+        <input type="number" name="goldValue" placeholder="Gold Value (BDT)" required><br><br>
+
+        <label for="propertyValue">Property Value</label><br>
+        <input type="number" name="propertyValue" placeholder="Property Value (BDT)" required><br><br>
+
+        <label for="savings">Savings</label><br>
+        <input type="number" name="savings" placeholder="Savings (BDT)" required><br><br>
+
+        <label for="otherAssets">Other Assets</label><br>
+        <input type="number" name="otherAssets" placeholder="Other Assets (BDT)" required><br><br>
+
+        <label for="region">Region</label>
+        <select name="region">
+            <option value="Dhaka/Chattagram">Dhaka/Chattagram</option>
+            <option value="City-Corporation">City Corporation</option>
+            <option value="Non City Corporation">Non City Corporation</option>
+        </select><br><br>
+
+        <lable for="freedomFighter">Freedom Fighter</lable>
+        <input type="checkbox" name="freedomFighter" value="true"><br><br>
+
+        <labe for="age">Age over 65</labe>
+        <input type="checkbox" name="age" value="true"><br><br>
+
+        <label for="special">Special & Helathy</label>
+        <input type="checkbox" name="special" value="true"><br><br>
+
+        <label for="specialChild">Have Special Child</label>
+        <input type="checkbox" name="specialChild" value="true"><br><br>
+
+        <label for="gender">Gender</label>
+        <select name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Third-Gender">Third Gender</option>
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
+    
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>

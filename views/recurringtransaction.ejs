@@ -1,9 +1,73 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/transaction.css">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h1>User can set timer on sending money or paying subscription or tracking subscription</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
-    </div>
+    <h3>Keep your fixed costs listed here</h3>
+    <% let month=['January', "February", 'March', 'April', 'May', 'June',
+        "July", "August", "September", "October", "November", "December"]; %>
+    <form method="get" action="/transaction">
+        <label for="month">Select Month:</label>
+        <select name="month" id="month-select" onchange="this.form.submit()">
+            <% for (let i = 0; i < month.length; i++) { %>
+                <option value="<%= i + 1 %>" <%= (selectedMonth === i + 1) ? 'selected' : '' %>>
+                    <%= month[i] %>
+                </option>
+            <% } %>
+        </select>
+    </form>
+    <% if(transactions.length == 0){%>
+        <h6>Yet to add any</h6>
+    <%} else {%>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Amount</th>
+                <th>Note</th>
+                <th>Delete</th>
+            </tr>
+            <% for(transaction of transactions){%>
+                <tr>
+                    <td><%=transaction.date.toISOString().split('T')[0]%></td>
+                    <td><%=transaction.explainSpends%></td>
+                    <td><%=transaction.amount%></td>
+                    <td><%=transaction.note%></td>
+                    <td>
+                        <form method="get" action="/recurringtransaction/<%=transaction._id%>/delete">
+                            <button type="submit">
+                                <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+        </table>
+    <%}%>
+    
+    <br><br>
+
+    <button id="show-form-btn">Add</button>
+    <hr />
+    <form id="add-form" class="hidden" method="post" action="/recurringtransaction/<%=user._id%>/add">
+        <label for="date">Started from *(write in this format DD-MM-YYYY)</label></br>
+        <input type="text" name="date" placeholder="DD-MM-YYYY" required></br></br>
+        <label for="note">Write any note</label><br>
+        <textarea name="note" rows="0" cols="50" maxlength="100">No note to add</textarea><br><br>
+        <label for="explainSpends">Where did you spend *</label><br>
+        <textarea name="explainSpends" rows="3" cols="50" maxlength="400" required></textarea>
+        <br><br>
+        <label for="amount">Amout of money *</label><br>
+        <input type="number" name="amount" min="0" step="0.0001" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        const showBtn = document.getElementById('show-form-btn');
+        const form = document.getElementById('add-form');
+    
+        showBtn.addEventListener('click', () => {
+          form.classList.toggle('hidden');
+        });
+    </script>
 </body>

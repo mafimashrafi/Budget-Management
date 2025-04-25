@@ -64,7 +64,7 @@ const allowedPages=[
     'incomeCategory', 'expenseCategory',
     'dashboard', 'taxCalculation',
     'multiCurrency',
-    'transactionHst', 'billReminder', 
+    'transaction-History', 'billReminder', 
     'emergency', 'exportData', 
     'investmentTracker', 'recurringtransaction', 
     'report', 'subscriptions', 'suggestions'];
@@ -97,6 +97,9 @@ const incomeCatagory = require("./routes/incomeCategoryRoute.js");
 const emergency = require("./routes/emergencyRoute.js");
 const investmentTracker = require("./routes/investmentTrackerRoute.js");
 const transaction = require("./routes/transactionRoute.js");
+const recurringTransaction = require("./routes/recurringTransactionRoute.js");
+const transactionHST = require("./routes/transactionHSTRoute.js");
+const taxCalculation = require("./routes/taxCalculationRoute.js");
 
 app.use("/", registerRoute); 
 app.use("/", loginRoute); 
@@ -111,6 +114,9 @@ app.use("/", incomeCatagory);
 app.use("/", emergency);
 app.use("/", investmentTracker);
 app.use("/", transaction);
+app.use("/", recurringTransaction);
+app.use("/", transactionHST);
+app.use("/", taxCalculation);
 
 app.listen(port, () =>{
     console.log(`Server is running at port: ${port}`);
