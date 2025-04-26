@@ -1,108 +1,119 @@
-body {
-    background: linear-gradient(to bottom right, #5a189a, #fcd34d);
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Wrapper for the entire page */
-    .page-wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+/* Apply background to the suggestion-page wrapper */
+.suggestion-page {
+  background: linear-gradient(to bottom right, #5a189a, #fcd34d);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+}
 
-    .suggestion{
-        text-align: center;
-        background-color: azure;
-        border-radius: 15px;
-    }
+/* Wrapper for the entire page */
+.suggestion-page .page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    #post{
-        background-color: bisque;
-        border-color: rgb(23, 17, 44);
-        border-radius: 5px;
-        padding: 5px;
-        margin-bottom: 1rem;
-    }
+.suggestion-page .suggestion {
+  text-align: center;
+  background-color: azure;
+  border-radius: 15px;
+  padding: 20px; /* Add padding inside the suggestion box */
+  max-width: 80%; /* Ensure it doesn't touch the sides */
+  margin: 0 auto; /* Center horizontally */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    #postbody{
-        background-color: blanchedalmond;
-    }
+.suggestion-page #post {
+  background-color: bisque;
+  border-color: rgb(23, 17, 44);
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 1rem;
+}
 
-    h1{
-        color: #fcd34d;
-    }
-    h3{
-        color: #5a189a;
-    }
+.suggestion-page #postbody {
+  background-color: blanchedalmond;
+}
 
-    textarea {
-        width: 400px;
-        height: 100px;
-        padding: 1rem;
-        border: none;
-        border-radius: 15px;
-        resize: none;
-        background-color: #fffaf0; /* light background for contrast */
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* golden glow */
-        color: #4b0082; /* deep purple text */
-        font-size: 1rem;
-        outline: none;
-      }
-      
-      textarea::placeholder {
-        color: #a084ca; /* pastel purple */
-      }
+.suggestion-page h1 {
+  color: #fcd34d;
+}
 
-      button {
-        margin-top: 1rem;
-        padding: 0.7rem 1.5rem;
-        background: linear-gradient(to right, #ffd700, #ffcc70); /* gold shades */
-        color: #4b0082; /* deep purple text */
-        border: none;
-        border-radius: 12px;
-        font-weight: bold;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
-      }
-      
-      button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6);
-      }
-      
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem; /* Add spacing between form elements */
-        margin-top: 1rem;
-    }
+.suggestion-page h3 {
+  color: #5a189a;
+}
 
-    label {
-        color: #ffcc00; /* Set the desired color (e.g., gold) */
-        font-weight: bold; /* Optional: Make the text bold */
-        font-size: 1rem; /* Optional: Adjust the font size */
-    }
-    
-    /* Center the headings */
-    h1, h3 {
-        text-align: center;
-        margin-bottom: 1rem;
-    }
+.suggestion-page textarea {
+  width: 400px;
+  height: 100px;
+  padding: 1rem;
+  border: none;
+  border-radius: 15px;
+  resize: none;
+  background-color: #fffaf0; /* light background for contrast */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* golden glow */
+  color: #4b0082; /* deep purple text */
+  font-size: 1rem;
+  outline: none;
+}
 
-    .hidden {
-      display: none;
-    }
+.suggestion-page textarea::placeholder {
+  color: #a084ca; /* pastel purple */
+}
 
-    #show-form-btn {
-      display: block;
-      margin: 1rem auto; /* Center horizontally and add spacing */
-      text-align: center;
-  }
+.suggestion-page .suggestion-btns {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(to right, #ffd700, #ffcc70); /* gold shades */
+  color: #4b0082; /* deep purple text */
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+.suggestion-page .suggestion-btns:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 215, 0, 0.6);
+}
+
+.suggestion-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* Add spacing between form elements */
+  margin-top: 1rem;
+}
+
+.suggestion-page label {
+  color: #ffcc00; /* Set the desired color (e.g., gold) */
+  font-weight: bold; /* Optional: Make the text bold */
+  font-size: 1rem; /* Optional: Adjust the font size */
+}
+
+/* Center the headings */
+.suggestion-page h1,
+.suggestion-page h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.suggestion-page .hidden {
+  display: none;
+}
+
+.suggestion-page #show-form-btn {
+  display: block;
+  margin: 1rem auto; /* Center horizontally and add spacing */
+  text-align: center;
+}

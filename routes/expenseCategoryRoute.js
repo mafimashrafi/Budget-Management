@@ -10,7 +10,7 @@ router.get("/expenseCategory", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID)
     const expenseCatagory = await ExpenseCategory.find({userID: userID});
-    res.render("expenseCategory.ejs", {error: null, user, expenseCatagory});
+    res.render("expenseCategory.ejs", {error: null, user, expenseCatagory, currentPage: 'expenseCategory'});
 });
 
 router.post("/expenseCategory/:id/add", verifyUser, async(req, res)=>{
@@ -34,7 +34,7 @@ router.post("/expenseCategory/:id/add", verifyUser, async(req, res)=>{
         res.redirect("/expenseCategory");
     }).catch((err)=>{
         console.log(err);
-        res.render("expenseCategory.ejs", {error: 'Failed to add', user, expenseCatagory})
+        res.render("expenseCategory.ejs", {error: 'Failed to add', user, expenseCatagory, currentPage: 'expenseCategory'})
     });
 });
 
@@ -48,7 +48,7 @@ router.get("/expenseCategory/:id/delete", verifyUser, async (req, res)=>{
         res.redirect("/expenseCategory");
     }).catch((err)=>{
         console.log(err);
-        res.render("expenseCategory.ejs", {error: 'Failed to delete', user, expenseCatagory})
+        res.render("expenseCategory.ejs", {error: 'Failed to delete', user, expenseCatagory, currentPage: 'expenseCategory'})
     });
 });
 

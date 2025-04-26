@@ -19,7 +19,7 @@ router.get("/recurringtransaction", verifyUser, async (req, res)=>{
         },
     });
 
-    res.render("recurringtransaction.ejs", { error: null, user, transactions, selectedMonth });
+    res.render("recurringtransaction.ejs", { error: null, user, transactions, selectedMonth, currentPage: 'recurringtransaction' });
 });
 
 router.post("/recurringtransaction/:id/add", verifyUser, async (req, res)=>{
@@ -52,7 +52,7 @@ router.post("/recurringtransaction/:id/add", verifyUser, async (req, res)=>{
         res.redirect("/recurringtransaction");
     }).catch((err)=>{
         console.log(err);
-        res.render("recurringtransaction.ejs", {error: "Failed to add", user, transactions})
+        res.render("recurringtransaction.ejs", {error: "Failed to add", user, transactions, currentPage: 'recurringtransaction'})
     });
 });
 
@@ -67,7 +67,7 @@ router.get("/recurringtransaction/:id/delete", verifyUser, async (req, res)=>{
         res.redirect("/recurringtransaction");
     }).catch((err)=>{
         console.log(err);
-        res.render("recurringtransaction.ejs", {error: "Failed to add", user, transactions})
+        res.render("recurringtransaction.ejs", {error: "Failed to add", user, transactions, currentPage: 'recurringtransaction'})
     });
 });
 

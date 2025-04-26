@@ -9,7 +9,7 @@ router.get("/emergency", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const emergencyFund = await EmergencyFund.find({userID: userID});
-    res.render("emergency.ejs", {error: null, user, emergencyFund});
+    res.render("emergency.ejs", {error: null, user, emergencyFund, currentPage: 'emergency'});
 });
 
 router.post("/emergency/:id/add", verifyUser, async(req, res)=>{
@@ -39,7 +39,7 @@ router.post("/emergency/:id/add", verifyUser, async(req, res)=>{
         res.redirect("/emergency");
     }).catch((err)=>{
         console.log(err);
-        res.render("emergency.ejs", {error: 'Failed to add', user, emergencyFund})
+        res.render("emergency.ejs", {error: 'Failed to add', user, emergencyFund, currentPage: 'emergency'})
     });
 });
 
@@ -54,7 +54,7 @@ router.get("/emergency/:id/delete", verifyUser, async(req, res)=>{
         res.redirect("/emergency");
     }).catch((err)=>{
         console.log(err);
-        res.render("emergency.ejs", {error: 'Failed to delete', user, emergencyFund})
+        res.render("emergency.ejs", {error: 'Failed to delete', user, emergencyFund, currentPage: 'emergency'})
     })
 })
 

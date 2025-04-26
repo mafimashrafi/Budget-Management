@@ -1,31 +1,33 @@
 <% layout("/layouts/boilerplate") %>
 <link rel="stylesheet" href="/suggestion.css">
 <body>
-    <h1>Post your suggestion(s) for others</h1>
+    <div class="suggestion-page">
+        <h1>Post your suggestion(s) for others</h1>
     
-    <h3>Suggestions</h3>
-    <div class="suggestion">
-        <% for(posts of suggestion){%>
-            <div id="post">
-                <p id="postBody"><%=posts.post%></p>
-                By: <%=posts.postBy%>
-                (<%=posts.postDate.toString().split(" ")[4]%>)
-            </div>
-        <%}%>
+        <h3>Suggestions</h3>
+        <div class="suggestion">
+            <% for(posts of suggestion){%>
+                <div id="post">
+                    <p id="postBody"><%=posts.post%></p>
+                    By: <%=posts.postBy%>
+                    (<%=posts.postDate.toString().split(" ")[4]%>)
+                </div>
+            <%}%>
+        </div>
+        <button id="show-form-btn" class="suggestion-btns">Post Suggestion</button>
+        <form id="add-form" class="hidden" method="post" action="/suggestions/<%=user._id%>/create">
+            <label for="postsgs">Post your suggestion:</label></br>
+            <textarea name="postsgs" row="5" cols="50" maxlength="200"></textarea></br>
+            <button class="suggestion-btns"  type="submit">Post Suggestion</button>
+        </form>
+        <hr />
+        <script>
+            const showBtn = document.getElementById('show-form-btn');
+            const form = document.getElementById('add-form');
+        
+            showBtn.addEventListener('click', () => {
+              form.classList.toggle('hidden');
+            });
+        </script>
     </div>
-    <button id="show-form-btn">Post Suggestion</button>
-    <form id="add-form" class="hidden" method="post" action="/suggestions/<%=user._id%>/create">
-        <label for="postsgs">Post your suggestion:</label></br>
-        <textarea name="postsgs" row="5" cols="50" maxlength="200"></textarea></br>
-        <button type="submit">Post Suggestion</button>
-    </form>
-    <hr />
-    <script>
-        const showBtn = document.getElementById('show-form-btn');
-        const form = document.getElementById('add-form');
-    
-        showBtn.addEventListener('click', () => {
-          form.classList.toggle('hidden');
-        });
-    </script>
 </body>

@@ -10,7 +10,7 @@ router.get("/subscriptions", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const subscription = await Subscription.find({userID: userID});
-    res.render("subscriptions.ejs", {error: null, user, subscription});
+    res.render("subscriptions.ejs", {error: null, user, subscription, currentPage: 'subscriptions'});
 });
 
 router.post("/subscriptions/:id/add", verifyUser, async(req, res)=>{
@@ -34,7 +34,7 @@ router.post("/subscriptions/:id/add", verifyUser, async(req, res)=>{
         res.redirect("/subscriptions");
     }).catch((err)=>{
         console.log(err);
-        res.render("subscriptions.ejs", {error: 'Failed to add', user, subscription})
+        res.render("subscriptions.ejs", {error: 'Failed to add', user, subscription, currentPage: 'subscriptions'})
     })
 });
 
@@ -47,7 +47,7 @@ router.get("/subscription/:id/delete", verifyUser, async (req, res)=>{
     await Subscription.findByIdAndDelete(id).then(()=>{
         res.redirect("/subscriptions");
     }).catch((err)=>{
-        res.render("subscriptions.ejs", {error: 'Failed to add', user, subscription});
+        res.render("subscriptions.ejs", {error: 'Failed to add', user, subscription, currentPage: 'subscriptions'});
     });
 });
 

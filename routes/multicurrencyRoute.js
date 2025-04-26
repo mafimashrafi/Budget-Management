@@ -7,7 +7,7 @@ const verifyUser = require("../middlewares/authMiddleware.js");
 const API_KEY = process.env.API_KEY;
 
 router.get("/multicurrency", verifyUser, (req, res) =>{
-    res.render("multiCurrency.ejs", {result: null});
+    res.render("multiCurrency.ejs", {result: null, currentPage: 'multicurrency'});
 });
 
 router.post("/multicurrency/convert", async (req, res) => {
@@ -23,7 +23,7 @@ router.post("/multicurrency/convert", async (req, res) => {
       });
     } catch (err) {
       console.error(err);
-      res.render("multiCurrency.ejs", { result: 'Error fetching conversion rate.' });
+      res.render("multiCurrency.ejs", { result: 'Error fetching conversion rate.', currentPage: 'multicurrency' });
     }
   });
   

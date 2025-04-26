@@ -9,7 +9,7 @@ router.get('/billReminder', verifyUser, async (req, res) => {
   const userID= req.userID;
   const user = await User.findById(userID);
   const reminders = await Reminder.find({userID: userID});
-  res.render('billReminder.ejs', {error: null, user, reminders});
+  res.render('billReminder.ejs', {error: null, user, reminders, currentPage: 'billReminder'});
 });
 
 router.post("/reminders/:id/add", verifyUser, async (req, res)=>{
@@ -42,7 +42,7 @@ router.post("/reminders/:id/add", verifyUser, async (req, res)=>{
     res.redirect("/billReminder");
   }).catch((err)=>{
     console.log(err);
-    res.render('billReminder.ejs', {error: "Failed to add", user, reminders});
+    res.render('billReminder.ejs', {error: "Failed to add", user, reminders, currentPage: 'billReminder'});
   });
 });
 
@@ -56,7 +56,7 @@ router.get("/reminders/:id/delete", verifyUser, async (req, res)=>{
     res.redirect("/billReminder");
   }).catch((err)=>{
     console.log(err);
-    res.render('billReminder.ejs', {error: "Failed to delete", user, reminders});
+    res.render('billReminder.ejs', {error: "Failed to delete", user, reminders, currentPage: 'billReminder'});
   });
 
 });

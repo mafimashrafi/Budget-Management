@@ -19,7 +19,7 @@ router.get("/transaction", verifyUser, async (req, res)=>{
         },
     });
 
-    res.render("transaction.ejs", { error: null, user, transactions, selectedMonth });
+    res.render("transaction.ejs", { error: null, user, transactions, selectedMonth ,currentPage: 'transaction' });
 });
 
 router.post("/transaction/:id/add", verifyUser, async (req, res)=>{
@@ -52,7 +52,7 @@ router.post("/transaction/:id/add", verifyUser, async (req, res)=>{
         res.redirect("/transaction");
     }).catch((err)=>{
         console.log(err);
-        res.render("transaction.ejs", {error: "Failed to add", user, transactions})
+        res.render("transaction.ejs", {error: "Failed to add", user, transactions, currentPage: 'transaction'})
     });
 });
 
@@ -67,7 +67,7 @@ router.get("/transaction/:id/delete", verifyUser, async (req, res)=>{
         res.redirect("/transaction");
     }).catch((err)=>{
         console.log(err);
-        res.render("transaction.ejs", {error: "Failed to add", user, transactions})
+        res.render("transaction.ejs", {error: "Failed to add", user, transactions, currentPage: 'transaction'})
     });
 });
 

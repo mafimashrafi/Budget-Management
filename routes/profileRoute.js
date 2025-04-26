@@ -19,7 +19,8 @@ router.get("/userProfile", verifyUser, async (req, res) => {
         if(!user){
             return res.status(404).send('User not found');
         }
-        res.render("userProfile.ejs", {user});
+        const referer = req.get('Referer');
+        res.render("userProfile.ejs", {user, referer});
     }catch(err){
         console.log("Error fetching user:" ,err.message);
         res.status(404).send("Internal Server Error");
@@ -54,5 +55,11 @@ router.delete("/delete/:id", async (req, res)=>{
         res.render("delete.ejs", {error: "Deletein failed"});
     }
 });
+
+// router.get('/userProfile', verifyUser, async (req, res) => {
+//     const user = await User.findById(req.userID);
+//     const referer = req.get('Referer'); // Get the previous page URL from the Referer header
+//     res.render('userProfile.ejs', { user, referer });
+// });
 
 module.exports = router;

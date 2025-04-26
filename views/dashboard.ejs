@@ -1,9 +1,29 @@
 <% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/dashboard.css">
 <body>
-    <h1>See a brief in dashboard</h1>
-    <div>
-        <form action="/" method="get">
-            <button type="submit" class="home">Home</button>
-        </form>
+    <div class="dashboard-container">
+        <!-- Left Section -->
+        <div class="dashboard-left">
+            <h1>Welcome, <%= user.name %>!</h1>
+            <p>
+                This website helps you manage your budget effectively. Here are some features:
+            </p>
+            <ul>
+                <li>Track your income and expenses.</li>
+                <li>Set savings goals and monitor progress.</li>
+                <li>Manage recurring transactions and subscriptions.</li>
+                <li>Plan for emergencies with an emergency fund.</li>
+                <li>Analyze your spending habits with detailed reports.</li>
+            </ul>
+            <p>
+                Keeping track of your finances is crucial for achieving financial stability and peace of mind. Start today and take control of your financial future!
+            </p>
+        </div>
+
+        <!-- Right Section -->
+        <div class="dashboard-right">
+            <img src="/images/saving-money-animation.gif" alt="Saving Money Animation">
+            <img src="/images/calculation-animation.gif" alt="Calculation Animation">
+        </div>
     </div>
 </body>

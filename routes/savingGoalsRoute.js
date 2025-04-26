@@ -11,7 +11,7 @@ router.get("/savingsGoal", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const savings = await SavingsGoal.find({userID: userID});
-    res.render("savingsGoal.ejs", {error: null, user, savings});
+    res.render("savingsGoal.ejs", {error: null, user, savings, currentPage: 'savingsGoal'});
 });
 
 //creat goals
@@ -35,7 +35,7 @@ router.post("/savingsGoal/:id/add", verifyUser, async(req, res)=>{
         res.redirect("/savingsGoal");
     }).catch((err)=>{
         console.log(err);
-        res.render("savingsGoal.ejs", {error: "Failed to add", user, savings});
+        res.render("savingsGoal.ejs", {error: "Failed to add", user, savings, currentPage: 'savingsGoal'});
     });
 });
 
@@ -63,7 +63,7 @@ router.post("/savingsGoal/:id/edit", verifyUser, async(req, res)=>{
         res.redirect("/savingsGoal");
     }).catch((err)=>{
         console.log(err);
-        res.render("savingsGoal.ejs", {error: "Failed to update", save});
+        res.render("savingsGoal.ejs", {error: "Failed to update", save, currentPage: 'savingsGoal'});
     });
 });
 
@@ -75,7 +75,7 @@ router.get("/savingsGoal/:id/delete", verifyUser, async(req, res)=>{
         res.redirect("/savingsGoal.ejs");
     }).catch((err)=>{
         console.log(err);
-        res.render("savingsGoal.ejs", {error: "Failed to delete", save})
+        res.render("savingsGoal.ejs", {error: "Failed to delete", save, currentPage: 'savingsGoal'})
     })
 });
 

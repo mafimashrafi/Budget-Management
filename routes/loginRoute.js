@@ -43,21 +43,20 @@ router.post("/login", async (req, res) =>{
         maxAge: 24 * 60 * 60 * 1000,
         sameSite: 'strict'
      });
-    res.redirect('/home');
+    res.redirect('/dashboard');
 
 });
 
 
 // Logout
-router.post('/logout', (req, res) => {
-    // res.clearCookie('token');
-    res.cookie('token', { 
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: new Date(0),
-        sameSite: 'strict'
-     });
-    res.redirect('/');
-  });
+router.post("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log("Error logging out:", err);
+            return res.status(500).send("Error logging out");
+        }
+        res.redirect("/");
+    });
+});
 
 module.exports = router;

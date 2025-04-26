@@ -64,7 +64,7 @@ router.get("/transaction-history", verifyUser, async (req, res)=>{
       }
       
     const histories = await TransactionHST.find({userID: userID}); 
-    res.render("transactionHST.ejs", {histories});
+      res.render("transactionHST.ejs", {histories, currentPage: 'transaction-history'});
 });
 
 module.exports = router;

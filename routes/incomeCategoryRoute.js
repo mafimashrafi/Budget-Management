@@ -9,7 +9,7 @@ router.get("/incomeCategory", verifyUser, async(req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID)
     const incomeCatagory = await IncomeCategory.find({userID: userID});
-    res.render("incomeCategory.ejs", {error: null, user, incomeCatagory});
+    res.render("incomeCategory.ejs", {error: null, user, incomeCatagory, currentPage: 'incomeCategory'});
 });
 
 router.post("/incomeCategory/:id/add", verifyUser, async(req, res)=>{
@@ -33,7 +33,7 @@ router.post("/incomeCategory/:id/add", verifyUser, async(req, res)=>{
         res.redirect("/incomeCategory");
     }).catch((err)=>{
         console.log(err);
-        res.render("incomeCategory.ejs", {error: 'Failed to add', user, incomeCatagory})
+        res.render("incomeCategory.ejs", {error: 'Failed to add', user, incomeCatagory, currentPage: 'incomeCategory'})
     });
 });
 
@@ -47,7 +47,7 @@ router.get("/incomeCategory/:id/delete", verifyUser, async (req, res)=>{
         res.redirect("/incomeCategory");
     }).catch((err)=>{
         console.log(err);
-        res.render("incomeCategory.ejs", {error: 'Failed to delete', user, incomeCatagory})
+        res.render("incomeCategory.ejs", {error: 'Failed to delete', user, incomeCatagory, currentPage: 'incomeCategory'})
     });
 });
 

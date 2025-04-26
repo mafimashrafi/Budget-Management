@@ -8,7 +8,7 @@ router.get("/taxCalculation", verifyUser, async (req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const taxProfile = await TaxProfile.find({userID: userID});
-    res.render("taxCalculation.ejs", {error: null, user, taxProfile});
+    res.render("taxCalculation.ejs", {error: null, user, taxProfile, currentPage: 'taxCalculation'});
 });
 
 router.post('/taxCalculation/:id/calculate', verifyUser, async (req, res) => {
@@ -107,7 +107,7 @@ router.post('/taxCalculation/:id/calculate', verifyUser, async (req, res) => {
     res.redirect("/taxCalculation");
   }).catch((err)=>{
     console.log(err);
-    res.render('taxCalculation.ejs', {error: "internal error", user, taxProfile});
+    res.render('taxCalculation.ejs', {error: "internal error", user, taxProfile, currentPage: 'taxCalculation'});
   });
 });
 

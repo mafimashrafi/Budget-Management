@@ -9,7 +9,7 @@ router.get("/investmentTracker", verifyUser, async (req, res)=>{
     const userID = req.userID;
     const user = await User.findById(userID);
     const investments = await Investment.find({userID: userID});
-    res.render("investmentTracker.ejs", {error: null, user, investments});
+    res.render("investmentTracker.ejs", {error: null, user, investments, currentPage: 'investmentTracker'});
 });
 
 router.post("/investment/:id/add", verifyUser, async(req, res)=>{
@@ -45,7 +45,7 @@ router.post("/investment/:id/add", verifyUser, async(req, res)=>{
         res.redirect("/investmentTracker");
     }).catch((err)=>{
         console.log(err);
-        res.render("investmentTracker.ejs", {error: "Failed to add", user, investments})
+        res.render("investmentTracker.ejs", {error: "Failed to add", user, investments, currentPage: 'investmentTracker'})
     });
 });
 
@@ -59,7 +59,7 @@ router.get("/investment/:id/delete", verifyUser, async(req, res)=>{
         res.redirect("/investmentTracker");
     }).catch((err)=>{
         console.log(err);
-        res.render("investmentTracker.ejs", {error: null, user, investments})
+        res.render("investmentTracker.ejs", {error: null, user, investments, currentPage: 'investmentTracker'})
     });
 })
 

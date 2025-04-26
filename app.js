@@ -2,17 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const path = require("path");
-const bcrypt = require("bcrypt");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cron = require('node-cron');
 const sendEmail = require('./utils/emailService');
 const Reminder = require("./models/billreminders.js")
+const session = require("express-session");
 
-//requiring models
 const User = require("./models/user.js"); 
 const verfyUser = require("./middlewares/authMiddleware.js");
 
@@ -57,31 +55,26 @@ cron.schedule('* * * * *', async () => {
     }
 });
 
-const allowedPages=[
-    'userProfile', 
-    'savingsGoal',
-    'budget', 'transaction', 
-    'incomeCategory', 'expenseCategory',
-    'dashboard', 'taxCalculation',
-    'multiCurrency',
-    'transaction-History', 'billReminder', 
-    'emergency', 'exportData', 
-    'investmentTracker', 'recurringtransaction', 
-    'report', 'subscriptions', 'suggestions'];
+app.use(session({
+    secret: process.env.SESSION_SECRET || "your-secret-key", // Use a secure secret key
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    }
+}));
 
 
 const coverPages = ['login', 'register'];
 
 //cover page
 app.get('/', (req, res) =>{
-    // using global pages array
     res.render("cover.ejs", {coverPages});
 });
 
-//home page
-app.get('/home', verfyUser, (req, res) =>{
-    res.render("home.ejs", {allowedPages});
-});
+
 
 //requiring route
 const registerRoute = require("./routes/registerRoute.js");
@@ -100,6 +93,7 @@ const transaction = require("./routes/transactionRoute.js");
 const recurringTransaction = require("./routes/recurringTransactionRoute.js");
 const transactionHST = require("./routes/transactionHSTRoute.js");
 const taxCalculation = require("./routes/taxCalculationRoute.js");
+const dashboard = require("./routes/dashboardRoute.js");
 
 app.use("/", registerRoute); 
 app.use("/", loginRoute); 
@@ -117,6 +111,8 @@ app.use("/", transaction);
 app.use("/", recurringTransaction);
 app.use("/", transactionHST);
 app.use("/", taxCalculation);
+app.use("/", dashboard);
+
 
 app.listen(port, () =>{
     console.log(`Server is running at port: ${port}`);
