@@ -1,9 +1,6 @@
 const express = require("express"); 
 const mongoose = require("mongoose");
-const path = require("path");
 const bcrypt = require("bcrypt");
-const methodOverride = require("method-override");
-const ejsMate = require("ejs-mate");
 const User = require("../models/user.js");
 const validator = require("validator");
 const sendVerificationEmail = require("../utils/sendEmail.js");
@@ -21,7 +18,6 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) =>{
     const {username, email, password, confirmPassword, phoneNumber} = req.body;
-    // console.log(password, req.body.confirmPassword);
 
     if(!validator.isEmail(email)){
         return res.render("register.ejs", {error: "Invalid email formate"});
@@ -34,6 +30,11 @@ router.post("/register", async (req, res) =>{
     const existingUser = await User.findOne({email});
     if(existingUser){
         return res.render("register.ejs", {error: "Email already exists", username, email, phoneNumber})
+    }
+
+    const existingNumber = await User.findOne({phoneNumber});
+    if(existingNumber){
+        return res.render("register.ejs", {error: "Phone Number already exists", username, email, phoneNumber})
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -53,12 +54,10 @@ router.post("/register", async (req, res) =>{
         res.render("register.ejs", {error: "Error creating user", username, email, phoneNumber});
     });
 
-    //generating verification token
     const vtoken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
     await sendVerificationEmail(newUser.email, vtoken);
 });
 
-//email verification
 router.get("/verify-email", async (req, res) => {
     const { vtoken } = req.query;
     try {
