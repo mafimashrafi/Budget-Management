@@ -1,23 +1,31 @@
 <% layout("/layouts/boilerplate") %>
 <link rel="stylesheet" href="/transactionHst.css">
 <body>
-    <h3>Monthly Transaction History</h3>
-    <table>
-        <tr>
-            <th>Year</th>
-            <th>Month</th>
-            <th>Total Amount</th>
-        </tr>
-        <%for(History of histories){%>
+    <div class="histoy-page">
+        <h3>Monthly Transaction History</h3>
+        <table>
             <tr>
-                <td><%=History.year%></td>
-                <td><%=History.month%></td>
-                <td><%=History.total%></td>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Total Amount</th>
             </tr>
-        <%}%>
-    </table>
-    <hr />
-    <h6>GO BACK TO</h6>
-    <a href="/transaction">Transaction</a><br>
-    <a href="/recurringtransaction">Recurring TRNX</a>
+            <% let month=['January', "February", 'March', 'April', 'May', 'June',
+            "July", "August", "September", "October", "November", "December"]; %>
+            <%for(History of histories){%>
+                <tr>
+                    <td><%=History.year%></td>
+                    <td><%=month[History.month-1]%></td>
+                    <td><%=History.total%></td>
+                </tr>
+            <%}%>
+        </table>
+        <hr />
+        <div class="transaction">
+            <a href="/transaction">Transaction</a><br>
+        </div>
+        <div class="recurringTransaction">
+            <a href="/recurringtransaction">Recurring TRNX</a>  
+        </div>
+        
+    </div>
 </body>

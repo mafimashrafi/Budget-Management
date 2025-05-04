@@ -1,3 +1,141 @@
 .hidden {
     display: none;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+  
+  .tax-page {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #5a189a, #fcd34d);
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    width: 100vw; 
+    margin-left: calc(-50vw + 50%);
+    min-height: calc(100vh - 100px);
+    box-sizing: border-box;
+  }
+
+  .tax-page h1 {
+    color: #fcd34d;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.tax-page h3 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.tax-page h1, .tax-page h3 {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tax-page h6 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+#show-form-btn {
+    display: block;
+    margin: 20px auto;
+    background: linear-gradient(to right, #5a189a, #fcd34d);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#show-form-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(90, 24, 154, 0.8);
+    background: linear-gradient(to right, #fcd34d, #5a189a);
+}
+
+.hidden {
+    display: none;
+}
+
+.tax-page form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #333;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.tax-page form label {
+    font-weight: bold;
+    color: #5a189a;
+}
+
+.tax-page form select, 
+.tax-page form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.tax-page form select:focus, 
+.tax-page form input:focus {
+    border-color: #d4e157;
+    outline: none;
+    box-shadow: 0 0 5px rgba(212, 225, 87, 0.5);
+}
+
+.tax-page form button {
+    background: linear-gradient(to right, #5a189a, #fcd34d);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.tax-page form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 15px rgba(90, 24, 154, 0.8);
+}
+
+@media (max-width: 768px) {
+    .tax-page form {
+        width: 100%;
+    }
+
+    .tax-page h1 {
+        font-size: 2rem;
+    }
+
+    #show-form-btn {
+        font-size: 1rem;
+    }
+}

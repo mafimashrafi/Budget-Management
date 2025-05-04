@@ -1,13 +1,14 @@
 <% layout("/layouts/boilerplate") %>
-<link rel="stylesheet" href="/transaction.css">
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="/recurringTransaction.css">
 <body>
-    <h3>Keep your fixed costs listed here</h3>
+    <div class="transaction-page">
+        <h3>Keep your fixed costs listed here</h3>
     <% let month=['January', "February", 'March', 'April', 'May', 'June',
         "July", "August", "September", "October", "November", "December"]; %>
-    <form method="get" action="/transaction">
-        <label for="month">Select Month:</label>
+    <form method="get" action="/recurringtransaction">
+        <label for="month" style="text-decoration: #5a189a; color: #d4e157">Select Month:</label>
         <select name="month" id="month-select" onchange="this.form.submit()">
             <% for (let i = 0; i < month.length; i++) { %>
                 <option value="<%= i + 1 %>" <%= (selectedMonth === i + 1) ? 'selected' : '' %>>
@@ -34,7 +35,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     <td><%=transaction.amount%></td>
                     <td><%=transaction.note%></td>
                     <td>
-                        <form method="get" action="/recurringtransaction/<%=transaction._id%>/delete">
+                        <form class="delete-button" method="get" action="/recurringtransaction/<%=transaction._id%>/delete">
                             <button type="submit">
                                 <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
                             </button>
@@ -62,6 +63,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <button type="submit">Submit</button>
     </form>
+    </div>
+    
     <script>
         const showBtn = document.getElementById('show-form-btn');
         const form = document.getElementById('add-form');

@@ -1,55 +1,90 @@
-/* General container styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
 .dashboard-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #77815c, #87ceeb); /* Purple, golden, sage, bluish */
+    color: #fff;
+    margin: 0;
+    width: 100vw; 
+    margin-left: calc(-50vw + 50%);
+    min-height: calc(100vh - 100px);
+    box-sizing: border-box;
 }
 
-/* Left section styling */
 .dashboard-left {
     width: 50%;
     padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard-left h1 {
     font-size: 2.5rem;
-    color: #333;
+    color: #fcd34d; /* Golden */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
 
 .dashboard-left p {
     font-size: 1.2rem;
-    color: #555;
-    line-height: 1.6;
+    color: #e0e0e0; /* Light grayish */
+    line-height: 1.8;
     margin-bottom: 20px;
 }
 
 .dashboard-left ul {
     list-style-type: disc;
     margin-left: 20px;
-    color: #333;
+    color: #d4e157; /* Sage-like green */
 }
 
 .dashboard-left ul li {
-    font-size: 1.1rem;
     margin-bottom: 10px;
+    font-size: 1.1rem;
 }
 
-/* Right section styling */
 .dashboard-right {
     width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 20px;
 }
 
 .dashboard-right img {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 20px;
+    max-width: 100%;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-right img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard-left, .dashboard-right {
+        width: 100%;
+    }
+
+    .dashboard-right img {
+        max-width: 90%;
+    }
 }

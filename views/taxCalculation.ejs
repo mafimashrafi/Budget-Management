@@ -1,7 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 <link rel="stylesheet" href="/taxCalculation.css">
 <body>
-    <h1> Calculate your tax</h1>
+    <div class="tax-page">
+        <h1> Calculate your tax</h1>
     <% if(taxProfile.length == 0){%>
         <h6>Yet to calculate your tax</h6>
     <%} else {%>
@@ -53,6 +54,8 @@
         <br><br>
         <button type="submit">Submit</button>
     </form>
+    </div>
+    
     <script>
         const showBtn = document.getElementById('show-form-btn');
         const form = document.getElementById('add-form');

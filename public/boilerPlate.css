@@ -2,21 +2,20 @@
     display: block;
 }
 
-/* Make all navbar links bold */
+
 .navbar-nav .nav-link {
     font-weight: bold;
-    color: #333; /* Default color */
+    color: #333; 
 }
 
-/* Highlight the active link */
 .navbar-nav .nav-link.active {
-    color: #5d0f0e; /* Highlight color */
-    text-decoration: underline; /* Optional: underline the active link */
+    color: #5d0f0e; 
+    text-decoration: underline; 
 }
 
-/* Add hover effect for links */
+
 .navbar-nav .nav-link:hover {
-    color: #00b354; /* Darker hover color */
+    color: #00b354; 
     text-decoration: none;
 }
 
@@ -37,57 +36,54 @@
     padding: 0;
     border: none;
     background: none;
-    color: #333; /* Match the default color of navbar links */
-    font-weight: bold; /* Match the font weight of other links */
-    text-decoration: none; /* Remove underline */
+    color: #333; 
+    font-weight: bold; 
+    text-decoration: none; 
     cursor: pointer;
-    display: inline-block; /* Ensure it behaves like a link */
-    line-height: 1.5; /* Match the line height of other links */
+    display: inline-block; 
+    line-height: 1.5; 
     vertical-align: middle;
 }
 
 .logout-btn:hover {
-    color: #00b354; /* Match the hover color of other links */
-    text-decoration: none; /* Ensure no underline on hover */
+    color: #00b354; 
+    text-decoration: none; 
 }
 
 .navbar-nav .nav-link,
 .logout-btn {
     display: inline-block;
-    padding: 0.5rem 1rem; /* Match the padding of other links */
-    line-height: 1.5; /* Ensure consistent line height */
-    vertical-align: middle; /* Align vertically */
+    padding: 0.5rem 1rem; 
+    line-height: 1.5; 
+    vertical-align: middle; 
 }
 
-/* Footer container styling */
 .footer {
-    background-color: #333; /* Dark background to separate it from the main page */
-    color: #fff; /* Light text for contrast */
+    background-color: #333; 
+    color: #fff; 
     padding: 20px;
     display: flex;
-    justify-content: space-between; /* Space between the two sections */
+    justify-content: space-between; 
     align-items: flex-start;
-    flex-wrap: wrap; /* Ensure responsiveness on smaller screens */
-    margin-top: 20px; /* Add spacing from the main page */
-    border-top: 5px solid #6a0dad; /* Add a top border to visually separate it */
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for separation */
+    flex-wrap: wrap; 
+    border-top: 5px solid #6a0dad; 
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-/* Footer sections */
 .footer-section {
-    flex: 1; /* Allow sections to take equal space */
-    margin: 10px; /* Add spacing between sections */
-    min-width: 200px; /* Ensure sections don't shrink too much */
+    flex: 1; 
+    margin: 10px; 
+    min-width: 200px; 
 }
 
-/* Footer headings */
+
 .footer-section h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    color: #fcd34d; /* Highlighted color for headings */
+    color: #fcd34d; 
 }
 
-/* Footer text and links */
+
 .footer-section p,
 .footer-section ul {
     font-size: 1rem;
@@ -104,7 +100,7 @@
 }
 
 .footer-section ul li a {
-    color: #00bcd4; /* Light blue links */
+    color: #00bcd4;
     text-decoration: none;
 }
 
@@ -112,10 +108,26 @@
     text-decoration: underline;
 }
 
-/* Responsive footer */
+.report-btn {
+    background: linear-gradient(to right, #8b0000, #ff6347); /* Red gradient */
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.report-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.8), 0 0 15px rgba(139, 0, 0, 0.8);
+}
+
+
 @media (max-width: 768px) {
     .footer {
-        flex-direction: column; /* Stack sections vertically on smaller screens */
+        flex-direction: column;
         align-items: center;
     }
 

@@ -1,0 +1,135 @@
+.hidden {
+    display: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .report-page {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #8b0000, #ff6347);
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    width: 100vw; 
+    margin-left: calc(-50vw + 50%);
+    min-height: calc(100vh - 100px);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.report-page h3 {
+    color: #ffcccb; /* Light coral */
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.post {
+    margin: 20px auto;
+    padding: 15px;
+    background: #ffe4e1; /* Misty rose */
+    color: #8b0000; /* Dark red */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+}
+
+#post {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #ffcccb; /* Light coral */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#postBody {
+    font-size: 1.2rem;
+    color: #8b0000; /* Dark red */
+}
+
+.report-btns {
+    background: linear-gradient(to right, #8b0000, #ff6347); /* Dark red to tomato gradient */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+}
+
+.report-btns:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.8), 0 0 15px rgba(139, 0, 0, 0.8);
+}
+
+.hidden {
+    display: none;
+}
+
+form {
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffe4e1; /* Misty rose */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+}
+
+form label {
+    font-weight: bold;
+    color: #8b0000; /* Dark red */
+}
+
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background: #fff5f5; /* Light reddish background */
+}
+
+form textarea:focus {
+    border-color: #ff6347; /* Tomato */
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
+}
+
+.close {
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #8b0000, #ff6347); /* Dark red to tomato gradient */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: fit-content;
+}
+
+.close a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.close a:hover {
+    color: #ffe4e1; /* Misty rose */
+    text-shadow: 0 0 10px rgba(255, 99, 71, 0.8);
+}

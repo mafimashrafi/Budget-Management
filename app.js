@@ -91,6 +91,7 @@ const recurringTransaction = require("./routes/recurringTransactionRoute.js");
 const transactionHST = require("./routes/transactionHSTRoute.js");
 const taxCalculation = require("./routes/taxCalculationRoute.js");
 const dashboard = require("./routes/dashboardRoute.js");
+const report = require("./routes/reportRoute.js");
 
 app.use("/", registerRoute); 
 app.use("/", loginRoute); 
@@ -109,6 +110,7 @@ app.use("/", recurringTransaction);
 app.use("/", transactionHST);
 app.use("/", taxCalculation);
 app.use("/", dashboard);
+app.use("/", report);
 
 
 app.listen(port, () =>{
