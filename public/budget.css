@@ -1,3 +1,96 @@
 .hidden {
     display: none;
   }
+<div class="budget-container">
+    <h1 class="budget-header">Budget Tracker</h1>
+    <ul class="budget-list">
+        <li class="budget-item">
+            <span class="todo">Groceries</span>
+            <span class="amount">$200</span>
+        </li>
+        <li class="budget-item">
+            <span class="todo">Rent</span>
+            <span class="amount">$1200</span>
+        </li>
+    </ul>
+    <button class="add-budget-btn">Add New Budget</button>
+</div>
+
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Container for the budget list */
+.budget-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.budget-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+/* Budget item list */
+.budget-list {
+    list-style: none;
+    padding: 0;
+}
+
+.budget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.budget-item:hover {
+    background: #f1f1f1;
+}
+
+/* Budget details */
+.budget-item .todo {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.budget-item .amount {
+    font-size: 16px;
+    color: #4CAF50;
+}
+
+/* Add button styling */
+.add-budget-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-budget-btn:hover {
+    background: #45a049;
+}
