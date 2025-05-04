@@ -3,7 +3,8 @@
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h3>Track your income</h3>
+    <div class="body-page">
+        <h3>Track your income</h3>
     <% let totalIncome = 0; %>
     <% let month=['January', "February", 'March', 'April', 'May', 'June',
         "July", "August", "September", "October", "November", "December"]; %>
@@ -32,7 +33,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     <%}%>
                     <td><%=income.date.toISOString().split('T')[0]%></td>
                     <td>
-                        <form method="get" action="/incomeCategory/<%=income._id%>/delete">
+                        <form class="delete-button" method="get" action="/incomeCategory/<%=income._id%>/delete">
                             <button type="submit">
                                 <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
                             </button>
@@ -42,9 +43,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             <%}%>
     </table>
     <%}%>
-    <p>Total Income: <%=totalIncome%></p>
+    <p id="total-income">Total Income: <%=totalIncome%></p>
     <br>
-    <button id="show-form-btn">Add</button>
+    <button id="show-form-btn">Add New Income</button>
     <% if (error) { %>
         <p style="color:red;"><%= error %></p>
       <% } %>
@@ -61,6 +62,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <button type="submit">Submit</button>
     </form>
+    </div>
+    
     <script>
         const showBtn = document.getElementById('show-form-btn');
         const form = document.getElementById('add-form');

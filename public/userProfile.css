@@ -1,0 +1,71 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #77815c, #a8d5ba); /* Sage and light green gradient */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h3 {
+    text-align: center;
+    color: #4a5d23; /* Dark sage */
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.personalInfo {
+    text-align: center;
+    margin: 20px auto;
+    width: 50%;
+    background: #f5f8f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#userIMG img {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 150px;
+    border-radius: 50%;
+    border: 3px solid #a8d5ba;
+}
+
+.personalInfo div {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+form {
+    text-align: center;
+    margin: 20px auto;
+}
+
+form button {
+    background: linear-gradient(to right, #77815c, #a8d5ba); /* Sage to light green gradient */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(168, 213, 186, 0.8), 0 0 15px rgba(119, 129, 92, 0.8);
+}
+
+#delete form button {
+    background: linear-gradient(to right, #a83a32, #d46a6a); /* Red gradient for delete button */
+    color: #fff;
+}
+
+#delete form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(212, 106, 106, 0.8), 0 0 15px rgba(168, 58, 50, 0.8);
+}

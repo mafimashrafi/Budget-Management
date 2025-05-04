@@ -25,7 +25,7 @@ const userSchema = new Schema({
     },
     image:{
         type: String,
-        default: "https://www.w3schools.com/howto/img_avatar.png",
+        default: "/logo.png",
     },
     createdAt: {
         type: Date,

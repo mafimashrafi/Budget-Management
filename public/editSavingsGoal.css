@@ -1,0 +1,80 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #5a189a, #fcd34d);
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h3 {
+    color: #fcd34d;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    text-align: left;
+    color: #333;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: bold;
+    color: #5a189a;
+}
+
+form textarea, form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+form input[type="radio"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+form textarea:focus, form input:focus {
+    border-color: #d4e157;
+    outline: none;
+    box-shadow: 0 0 5px rgba(212, 225, 87, 0.5);
+}
+
+form button {
+    background: linear-gradient(to right, #5a189a, #fcd34d);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 15px rgba(90, 24, 154, 0.8);
+}
+
+p[style="color:red;"] {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}

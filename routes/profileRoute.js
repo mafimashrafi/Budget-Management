@@ -56,10 +56,5 @@ router.delete("/delete/:id", async (req, res)=>{
     }
 });
 
-// router.get('/userProfile', verifyUser, async (req, res) => {
-//     const user = await User.findById(req.userID);
-//     const referer = req.get('Referer'); // Get the previous page URL from the Referer header
-//     res.render('userProfile.ejs', { user, referer });
-// });
 
 module.exports = router;

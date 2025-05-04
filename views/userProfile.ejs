@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BM: <%=user.name%>'s Profile</title>
+    <link rel="stylesheet" href="/userProfile.css">
 </head>
 <body>
     <h3>Welcome to <%=user.name%>'s profile</h3>
     <div class="personalInfo">
+        <div id="userIMG">
+            <img src="<%=user.image || '/image/cat.png'%>" alt="User profile">
+        </div>
         <div id="name"><p>Name: <b><%=user.name%></b></p></div>
-        <div id="emai"><p>Email: <b><%=user.email%></b></p></div>
+        <div id="email"><p>Email: <b><%=user.email%></b></p></div>
         <div id="phone"><p>Phone: <b><%=user.phoneNumber%></b></p></div>
-        <div id="userIMG"><img src="<%=user.image%> alt="User profile"></div>
     </div>
     <div>
         <form action="<%= referer || '/dashboard' %>" method="get">
