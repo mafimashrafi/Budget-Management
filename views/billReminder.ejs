@@ -3,7 +3,8 @@
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h1>Set reminders</h1>
+    <div class="reminder-page">
+        <h3>Set reminders</h3>
     <% if (reminders.length == 0){%>
         <h6>Yet to add any</h6>
     <%} else {%>
@@ -17,7 +18,46 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                 <tr><td><%=reminder.billToRemind%></td>
                     <td><%=reminder.reminderDate.toISOString().split('T')[0]%></td>
                     <td>
-                        <form method="get" action="/reminders/<%= reminder._id %>/delete">
+                        <form class="delete-button"  method="get" action="/reminders/<%= reminder._id %>/delete">
+                            <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+            </table>
+    <%}%>
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <button id="show-form-btn">Add New Reminder</button>
+    
+    <form id="add-form" class="hidden" method="post" action="/reminders/<%= user._id %>/add">
+        <label for="billToRemind">Remeinder</label><br>
+        <textarea name="billToRemind" rows="0" cols="50" maxlength="200" required>
+        </textarea><br><br>
+        <label for="reminderDate">Date of Remeinder (DD-MM-YYYY)</label><br>
+        <input type="text" name="reminderDate" placeholder="DD-MM-YYYY" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+
+    <h3>Set reminders</h3>
+    <% if (reminders.length == 0){%>
+        <h6>Yet to add any</h6>
+    <%} else {%>
+        <table bordeer="1">
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Remove</th>
+            </tr>
+            <% for(reminder of reminders){%>
+                <tr><td><%=reminder.billToRemind%></td>
+                    <td><%=reminder.reminderDate.toISOString().split('T')[0]%></td>
+                    <td>
+                        <form class="delete-button"  method="get" action="/reminders/<%= reminder._id %>/delete">
                             <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
                         </form>
                     </td>

@@ -2,8 +2,190 @@
     display: none;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 8px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .emergency-page {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #5a189a, #fcd34d);
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+    width: 100vw; 
+    margin-left: calc(-50vw + 50%);
+    min-height: calc(100vh - 100px);
+    box-sizing: border-box;
+}
+
+.emergency-page h3 {
+    text-align: center;
+    color: #fcd34d;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.emergency-page table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.emergency-page th, .emergency-page td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.emergency-page th {
+    background-color: #5a189a;
+    color: #fff;
+    font-weight: bold;
+}
+
+.emergency-page td {
+    background-color: #f9f9f9;
+}
+
+.emergency-page tr:nth-child(even) td {
+    background-color: #f3e5f5;
+}
+
+.emergency-page tr:hover td {
+    background-color: #d4e157;
+    color: #333;
+}
+
+#show-form-btn {
+    display: block;
+    margin: 20px auto;
+    background: linear-gradient(to right, #5a189a, #fcd34d);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#target-amount{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5a189a;
+    background: #fcd34d;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: fit-content;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+#show-form-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 25px rgba(90, 24, 154, 0.8);
+    background: linear-gradient(to right, #fcd34d, #5a189a);
+}
+
+.emergency-page form {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+.emergency-page form label {
+    font-weight: bold;
+    color: #5a189a;
+}
+
+.emergency-page form input, 
+.emergency-page form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.emergency-page form input:focus, 
+.emergency-page form textarea:focus {
+    border-color: #d4e157;
+    outline: none;
+    box-shadow: 0 0 5px rgba(212, 225, 87, 0.5);
+}
+
+.emergency-page form button {
+    background: linear-gradient(to right, #5a189a, #fcd34d);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.emergency-page form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(90, 24, 154, 0.5);
+}
+
+@media (max-width: 768px) {
+    .emergency-page table, .emergency-page form {
+        width: 100%;
+    }
+
+    .emergency-page h3 {
+        font-size: 2rem;
+    }
+
+    #show-form-btn {
+        font-size: 1rem;
+    }
+}
+
+.delete-button {
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    display: inline;
+}
+
+.delete-button button {
+    background: linear-gradient(to right, #5a189a, #fcd34d);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.delete-button button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 15px rgba(90, 24, 154, 0.8);
+}

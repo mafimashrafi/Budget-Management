@@ -3,74 +3,127 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="/investmentTracker.css">
 <body>
-    <h3>Track your investment</h3>
-    <% let totalInvestment = 0;%>
-    <% if(investments.length == 0){%>
-        <h6>Yet to add any</h6>
-    <%} else {%>
-        <table border="1">
-            <tr>
-                <th>Investment Detail</th>
-                <th>Investment Type</th>
-                <th>Invested AMount</th>
-                <th>Date</th>
-                <th>Delete</th>
-            </tr>
-            <% for(investment of investments){%>
+    <div class="investment-tracker-page">
+        <h3>Track your investment</h3>
+        <% let totalInvestment = 0;%>
+        <% if(investments.length == 0){%>
+            <h6>Yet to add any</h6>
+        <%} else {%>
+            <table border="1">
                 <tr>
-                    <td><%=investment.investmentName%></td>
-                    <td><%=investment.investmentType%></td>
-                    <td><%=investment.investedAmount%></td>
-                    <% totalInvestment+=investment.investedAmount; %>
-                    <td><%=investment.investingDate.toISOString().split('T')[0]%></td>
-                    <td>
-                        <form method="get" action="/investment/<%=investment._id%>/delete">
-                            <button type="submit">
-                                <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
-                            </button>
-                        </form>
-                    </td>
+                    <th>Investment Detail</th>
+                    <th>Investment Type</th>
+                    <th>Invested AMount</th>
+                    <th>Date</th>
+                    <th>Delete</th>
                 </tr>
-            <%}%>
-        </table>
-    <%}%>
-    <p>Total investment: <%=totalInvestment%></p>
-    <br>
-    <button id="show-form-btn">Add</button>
-    <hr />
-    <form id="add-form" class="hidden" method="post" action="/investment/<%=user._id%>/add">
-        <label for="investmentName">Name of your investment</label><br>
-        <textarea name="investmentName" rows="0" cols="50" maxlength="200" required></textarea><br><br>
-        <label for="investmentType">Type of your investment</label><br>
-        <select name="investmentType" required>
-            <option value="Bonds">Bonds</option>
-            <option value="Stocks">Stocks</option>
-            <option value="Mutual Fund">Mutual Fund</option>
-            <option value="ETFs">Exchange-Traded Funds</option>
-            <option value="Fixed Deposit">Fixed Deposite</option>
-            <option value="Real Estate">Real Estate</option>
-            <option value="Gold & Silver">Gold & Silver</option>
-            <option value="Collectibles">Collectibles</option>
-            <option value="Cryptocurrency">Cryptocurrency</option>
-            <option value="REITs">Real Estate Investment Trusts</option>
-            <option value="Peer-to-Peer">Lending someone</option>
-            <option value="Index Funds">Index Funds</option>
-            <option value="Education/Course">Education/Course</option>
-            <option value="Satrting Business">Starting Business</option>
-        </select><br><br>
-        <lable for="investedAmount">Amount</lable><br>
-        <input type="number" name="investedAmount" min="0" steps="0.0001"><br><br>
-        <label for="investingDate">Started from (write in this format DD-MM-YYYY)</label></br>
-        <input type="text" name="investingDate" placeholder="DD-MM-YYYY"></br></br>
-        <button type="submit">Submit</button>
+                <% for(investment of investments){%>
+                    <tr>
+                        <td><%=investment.investmentName%></td>
+                        <td><%=investment.investmentType%></td>
+                        <td><%=investment.investedAmount%></td>
+                        <% totalInvestment+=investment.investedAmount; %>
+                        <td><%=investment.investingDate.toISOString().split('T')[0]%></td>
+                        <td>
+                            <form method="get" action="/investment/<%=investment._id%>/delete">
+                                <button type="submit">
+                                    <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <%}%>
+            </table>
+        <%}%>
+        <p>Total investment: <%=totalInvestment%></p>
+        <br>
 
-    </form>
-    <script>
-        const showBtn = document.getElementById('show-form-btn');
-        const form = document.getElementById('add-form');
-    
-        showBtn.addEventListener('click', () => {
-          form.classList.toggle('hidden');
-        });
-    </script>
+        <canvas id="investmentChart" width="400" height="200"></canvas>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const investmentData = <%- JSON.stringify(investments) %>;
+            const dates = investmentData.map(investment => 
+                new Date(investment.investingDate).toISOString().split('T')[0]
+            );
+            const amounts = investmentData.map(investment => investment.investedAmount);
+
+            const ctx = document.getElementById('investmentChart').getContext('2d');
+            const investmentChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Investment Amount',
+                        data: amounts,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Amount'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+        <button id="show-form-btn">Add</button>
+        <hr />
+        <form id="add-form" class="hidden" method="post" action="/investment/<%=user._id%>/add">
+            <label for="investmentName">Name of your investment</label><br>
+            <textarea name="investmentName" rows="0" cols="50" maxlength="200" required></textarea><br><br>
+            <label for="investmentType">Type of your investment</label><br>
+            <select name="investmentType" required>
+                <option value="Bonds">Bonds</option>
+                <option value="Stocks">Stocks</option>
+                <option value="Mutual Fund">Mutual Fund</option>
+                <option value="ETFs">Exchange-Traded Funds</option>
+                <option value="Fixed Deposit">Fixed Deposite</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Gold & Silver">Gold & Silver</option>
+                <option value="Collectibles">Collectibles</option>
+                <option value="Cryptocurrency">Cryptocurrency</option>
+                <option value="REITs">Real Estate Investment Trusts</option>
+                <option value="Peer-to-Peer">Lending someone</option>
+                <option value="Index Funds">Index Funds</option>
+                <option value="Education/Course">Education/Course</option>
+                <option value="Satrting Business">Starting Business</option>
+            </select><br><br>
+            <lable for="investedAmount">Amount</lable><br>
+            <input type="number" name="investedAmount" min="0" steps="0.0001"><br><br>
+            <label for="investingDate">Started from (write in this format DD-MM-YYYY)</label></br>
+            <input type="text" name="investingDate" placeholder="DD-MM-YYYY"></br></br>
+            <button type="submit">Submit</button>
+
+        </form>
+        <script>
+            const showBtn = document.getElementById('show-form-btn');
+            const form = document.getElementById('add-form');
+        
+            showBtn.addEventListener('click', () => {
+            form.classList.toggle('hidden');
+            });
+        </script>
+    </div>
 </body>

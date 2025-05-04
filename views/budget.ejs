@@ -3,54 +3,55 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="/budget.css">
 <body>
-    <h3>My budget list</h3>
-    <% let totalBudget = 0; %>
-    <style>
-        table, th, td {
-          border: 1px solid black;
-          border-collapse: collapse;
-          padding: 8px;
-        }
-      </style>
-    <table border="1">
-        <tr>
-            <th>To Do</th>
-            <th>Budget</th>
-            <th>Delete</th>
-        </tr>
-        <% for(detail of budgetList){%>
-            <% totalBudget+= detail.budget; %>
+    <div class="budget-page">
+        <h3>My budget list</h3>
+        <% let totalBudget = 0; %>
+        <style>
+            table, th, td {
+              border: 1px solid black;
+              border-collapse: collapse;
+              padding: 8px;
+            }
+          </style>
+        <table border="1">
             <tr>
-                <td><%=detail.todo%></td>
-                <td><%=detail.budget%></td>
-                <td>
-                    <form method="post" action="/budget/<%=detail._id%>/delete?_method=DELETE">
-                        <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
-                    </form>
-                </td>
+                <th>To Do</th>
+                <th>Budget</th>
+                <th>Delete</th>
             </tr>
-        <%}%>
-    </table>
-
-    <p>Total budget: <%=totalBudget%></p>
-    <a href="/emergency">Check your emergency fund</a>
-
-    <% if (error) { %>
-        <p style="color:red;"><%= error %></p>
-      <% } %>
-    <hr />
-
-    <div class="createBudget">
-        <h5>Add new buget in the list</h5>
-        <button id="show-form-btn">Add</button>
-        <form id="add-form" class="hidden" method="post" action="budget/<%=user._id%>/add">
-            <label for="todo">Budget For</label></br>
-            <textarea name="todo" rows="0" cols="50" maxlength="100"></textarea></br></br>
-            <label for="budget">Budget</label></br>
-            <input type="number" name="budget" min="0"  step="0.0001"></br></br>
-
-            <button type="submit">Add</button>
-        </form>
+            <% for(detail of budgetList){%>
+                <% totalBudget+= detail.budget; %>
+                <tr>
+                    <td><%=detail.todo%></td>
+                    <td><%=detail.budget%></td>
+                    <td>
+                        <form method="post" action="/budget/<%=detail._id%>/delete?_method=DELETE">
+                            <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            <%}%>
+        </table>
+    
+        <p>Total budget: <%=totalBudget%></p>
+        <a href="/emergency" style="text-decoration: #5a189a; color: #fcd34d;">Check your emergency fund</a>
+    
+        <% if (error) { %>
+            <p style="color:red;"><%= error %></p>
+          <% } %>
+        <hr />
+    
+        <div class="createBudget">
+            <button id="show-form-btn">Add New Budget</button>
+            <form id="add-form" class="hidden" method="post" action="budget/<%=user._id%>/add">
+                <label for="todo">Budget For</label></br>
+                <textarea name="todo" rows="0" cols="50" maxlength="100"></textarea></br></br>
+                <label for="budget">Budget</label></br>
+                <input type="number" name="budget" min="0"  step="0.0001"></br></br>
+    
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
     <script>
         const showBtn = document.getElementById('show-form-btn');

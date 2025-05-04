@@ -3,7 +3,8 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="/savingsGoal.css">
 <body>
-    <h4>Lists your saving goals</h4>
+    <div class="savings-goal-page">
+        <h4>Lists your saving goals</h4>
     <style>
         table, th, td {
           border: 1px solid black;
@@ -40,12 +41,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     <%}%>
                 </td>
                 <td>
-                    <form method="get" action="/savingsGoal/<%=save._id%>/edit">
+                    <form  class="edit-button"  method="get" action="/savingsGoal/<%=save._id%>/edit">
                         <button type="submit">Edit</button>
                     </form>
                 </td>
                 <td>
-                    <form method="get" action="/savingsGoal/<%=save._id%>/delete">
+                    <form  class="delete-button" method="get" action="/savingsGoal/<%=save._id%>/delete">
                         <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
                     </form>
                 </td>
@@ -54,8 +55,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             <% savedAmount+=save.savedAmount %>
         <%}%>
     </table>
-    <p> Targeted Amount: <%=targetAmount%></p>
-    <p> Saved Amount: <%=savedAmount%></p>
+    <p id="target-amount"> Targeted Amount: <%=targetAmount%></p>
+    <p id="saved-amount"> Saved Amount: <%=savedAmount%></p>
     <% if(savedAmount > targetAmount){%>
         <p>Extra saved: <%=savedAmount - targetAmount%></p>
     <%}%>
@@ -67,7 +68,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     <%}%>
 
     <hr />
-    <button id="show-form-btn">Add</button>
+    <button id="show-form-btn">Add New GoalS</button>
     <form id="add-form" class="hidden" method="post" action="/savingsGoal/<%=user._id%>/add">
         <labe for="savingSource">From where do you want to save?</labe></br>
         <textarea name="savingSource" rows="0" cols="50"></textarea></br></br>
@@ -87,6 +88,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     <% if(error){%>
         <p style="color:red;"><%= error %></p>
     <%}%>
+    </div>
+    
     <script>
         const showBtn = document.getElementById('show-form-btn');
         const form = document.getElementById('add-form');

@@ -3,54 +3,57 @@
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h1>My Subscriptions & History</h1>
-    <% if (subscription.length == 0){%>
-        <h4>Your subscription list is empyt</h4>
-        <p>Click on the add button to create your sbscription list</p>
-    <%} else {%>
-        <table bordeer="1">
-            <tr>
-                <th>Subscription</th>
-                <th>Type</th>
-                <th>Subs Fee</th>
-                <th>Started From</th>
-                <th>Remove</th>
-            </tr>
-            <% for(sub of subscription){%>
-                <tr><td><%=sub.subscriptionName%></td>
-                    <td><%=sub.subscriptionType%></td> 
-                    <td><%=sub.subscriptionFee%></td>
-                    <td><%=sub.startingDate.toISOString().split('T')[0]%></td>
-                    <td>
-                        <form method="get" action="/subscription/<%=sub._id%>/delete">
-                            <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
-                        </form>
-                    </td>
+    <div class="subscription-page">
+        <h1>My Subscriptions & History</h1>
+        <% if (subscription.length == 0){%>
+            <h4>Your subscription list is empyt</h4>
+            <p>Click on the add button to create your sbscription list</p>
+        <%} else {%>
+            <table bordeer="1">
+                <tr>
+                    <th>Subscription</th>
+                    <th>Type</th>
+                    <th>Subs Fee</th>
+                    <th>Started From</th>
+                    <th>Remove</th>
                 </tr>
-            <%}%>
-            </table>
-    <%}%>
-    <button id="show-form-btn">Add</button>
-    <hr />
-    <div class="addingSub">
-        <form id="add-form" class="hidden" method="POST" action="/subscriptions/<%=user._id%>/add">
-            <label for="subscriptionName">Name of the subscription</label></br>
-            <textarea name="subscriptionName" rows="0" cols="50" maxlength="200"></textarea></br></br>
-            <label for="subscriptionType" required>Select a subscription type:</label></br>
-            <select name="subscriptionType" required>
-                <option value="Monthly">Monthly</option>
-                <option value="Daily">Daily</option>
-                <option value="Weekly">Weekly</option>
-                <option value="Tri-Monthly">Tri-Monthly</option>
-                <option value="Yearly">Yearly</option>
-            </select></br></br>
-            <label for="subscriptionFee">Subscription Fee</label></br>
-            <input type="number" name="subscriptionFee" min="0" step="0.001"></br></br>
-            <label for="startingDate">Started from (write in this format DD-MM-YYYY)</label></br>
-            <input type="text" name="startingDate" placeholder="DD-MM-YYYY" required></br></br>
-            <button type="submit">Submit</button>
-        </form>
+                <% for(sub of subscription){%>
+                    <tr><td><%=sub.subscriptionName%></td>
+                        <td><%=sub.subscriptionType%></td> 
+                        <td><%=sub.subscriptionFee%></td>
+                        <td><%=sub.startingDate.toISOString().split('T')[0]%></td>
+                        <td>
+                            <form method="get" action="/subscription/<%=sub._id%>/delete">
+                                <button type="submit"><i class="fa-solid fa-trash" style="color: #8f1010;"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                <%}%>
+                </table>
+        <%}%>
+        <button id="show-form-btn">Add</button>
+        <hr />
+        <div class="addingSub">
+            <form id="add-form" class="hidden" method="POST" action="/subscriptions/<%=user._id%>/add">
+                <label for="subscriptionName">Name of the subscription</label></br>
+                <textarea name="subscriptionName" rows="0" cols="50" maxlength="200"></textarea></br></br>
+                <label for="subscriptionType" required>Select a subscription type:</label></br>
+                <select name="subscriptionType" required>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Tri-Monthly">Tri-Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                </select></br></br>
+                <label for="subscriptionFee">Subscription Fee</label></br>
+                <input type="number" name="subscriptionFee" min="0" step="0.001"></br></br>
+                <label for="startingDate">Started from (write in this format DD-MM-YYYY)</label></br>
+                <input type="text" name="startingDate" placeholder="DD-MM-YYYY" required></br></br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
+
 
     <script>
         const showBtn = document.getElementById('show-form-btn');

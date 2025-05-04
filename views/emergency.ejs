@@ -3,7 +3,8 @@
 <link rel="stylesheet" 
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <body>
-    <h3>Tracking Emergency Fund</h3>
+    <div class="emergency-page">
+        <h3>Tracking Emergency Fund</h3>
     <% let targetIDX = 0; %>
     <% if(emergencyFund.length <= 1){%>
         <% target = emergencyFund[0].targetfund; %>
@@ -29,7 +30,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     <td><%=fund.note%></td>
                     <td><%=fund.depositeDate.toISOString().split('T')[0]%></td>
                     <td>
-                        <form method="get" action="/emergency/<%=fund._id%>/delete">
+                        <form class="delete-button" method="get" action="/emergency/<%=fund._id%>/delete">
                             <button type="submit">
                                 <i class="fa-solid fa-trash" style="color: #8f1010;"></i>
                             </button>
@@ -38,12 +39,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                 </tr>
             <%}%>
         </table>
-        <p>Targeted amount: <%=target%></p>
+        <p id="target-amount">Targeted amount: <%=target%></p>
     <%}%>
     <% if(error){%>
         <p style="color:red;"><%= error %></p>
     <%}%>
-    <button id="show-form-btn">Add</button>
+    <button id="show-form-btn">Add New Budget</button>
     <hr />
     <form id="add-form" class="hidden" method="post" action="/emergency/<%=user._id%>/add">
         <label for="targetfund">Your targeted Fund (re-enter to update this value)</label><br>
@@ -56,6 +57,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         <input type="text" name="depositeDate" placeholder="DD-MM-YYYY"></br></br>
         <button type="submit">Submit</button>
     </form>
+    </div>
+
     <script>
         const showBtn = document.getElementById('show-form-btn');
         const form = document.getElementById('add-form');

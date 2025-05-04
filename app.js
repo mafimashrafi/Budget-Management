@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = 8080;
 
-//connection local mongodb
 main()
     .then(() => {
         console.log("✅ Database connected successfully");
@@ -56,27 +55,25 @@ cron.schedule('* * * * *', async () => {
 });
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || "your-secret-key", // Use a secure secret key
+    secret: process.env.SESSION_SECRET || "your-secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
+        secure: process.env.NODE_ENV === "production", 
+        maxAge: 24 * 60 * 60 * 1000 
     }
 }));
 
 
 const coverPages = ['login', 'register'];
 
-//cover page
+
 app.get('/', (req, res) =>{
     res.render("cover.ejs", {coverPages});
 });
 
 
-
-//requiring route
 const registerRoute = require("./routes/registerRoute.js");
 const profileRoute = require("./routes/profileRoute.js");
 const loginRoute = require("./routes/loginRoute.js");
