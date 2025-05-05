@@ -1,0 +1,61 @@
+body {
+    background-color: #e6f0f2;
+    font-family: 'Segoe UI', sans-serif;
+    color: #2e4e3f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+h1 {
+    color: #3e6c5c;
+    margin-bottom: 30px;
+}
+
+form.regi-frm {
+    background-color: #f5fbf8;
+    padding: 30px 40px;
+    border: 2px solid #b3c7c1;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    width: 300px;
+}
+
+form label {
+    font-weight: 500;
+    color: #3b5c53;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #b7d3cc;
+    border-radius: 6px;
+    margin-top: 4px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+}
+
+form input:focus {
+    border-color: #6da4a2;
+    outline: none;
+    background-color: #f0fafb;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #a2d5c6;
+    color: #003f3f;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #8fc4b8;
+}
