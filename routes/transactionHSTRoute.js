@@ -65,7 +65,7 @@ router.get("/transaction-history", verifyUser, async (req, res)=>{
     
     try{
       const histories = await TransactionHST.find({userID: userID}); 
-      res.render("transactionHST.ejs", {histories, currentPage: 'transaction-history'});
+      res.render("transactionHst.ejs", {histories, currentPage: 'transaction-history'});
     }catch(error){
       console.error("Something went wrong:", error.message);
       res.redirect("/dashbord");
