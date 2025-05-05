@@ -43,19 +43,22 @@ router.post("/register", async (req, res) => {
         email: email,
         password: hashPassword,
         phoneNumber: phoneNumber,
-        isVerified: false,
+        isVerified: false, // Initially set as not verified
         createdAt: new Date(),
     });
 
     newUser.save()
         .then(async (user) => {
+            console.log("User created successfully");
 
+            // Generate a verification token
             const vtoken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
+            // Send the verification email
             const verificationLink = `${process.env.BASE_URL}/verify-email?vtoken=${vtoken}`;
             await sendVerificationEmail(user.email, verificationLink);
 
-            res.render("register.ejs", { error: "Verification email sent. Please check your inbox/spam." });
+            res.render("register.ejs", { error: "Verification email sent. Please check your inbox." });
         })
         .catch((err) => {
             console.log(err);
