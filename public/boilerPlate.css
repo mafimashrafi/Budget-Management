@@ -63,6 +63,7 @@
     color: #fff; 
     padding: 20px;
     display: flex;
+    margin-top: 40px;
     justify-content: space-between; 
     align-items: flex-start;
     flex-wrap: wrap; 

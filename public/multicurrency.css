@@ -63,3 +63,19 @@ body {
     color: #6a0dad;
   }
   
+.warning {
+    background-color: #fff8e1;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.warning p {
+    margin: 0;
+    line-height: 1.5;
+}
