@@ -57,7 +57,7 @@ router.post("/register", async (req, res) => {
             // Send the verification email
             const verificationLink = `${process.env.BASE_URL}/verify-email?vtoken=${vtoken}`;
             await sendVerificationEmail(user.email, verificationLink);
-
+            console.log("Verification Link:", verificationLink);
             res.render("register.ejs", { error: "Verification email sent. Please check your inbox." });
         })
         .catch((err) => {
