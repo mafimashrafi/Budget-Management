@@ -25,7 +25,7 @@ const userSchema = new Schema({
     },
     image:{
         type: String,
-        default: "/logo.png",
+        default: "/image/logo.png",
     },
     createdAt: {
         type: Date,

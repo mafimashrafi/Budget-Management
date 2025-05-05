@@ -9,6 +9,7 @@ const newEmergencySchema =  new Schema({
     },
     targetfund:{
         type: Number,
+        default: 0,
     },
     currentfund:{
         type: Number,

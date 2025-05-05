@@ -10,11 +10,9 @@ const cron = require('node-cron');
 const sendEmail = require('./utils/emailService');
 const Reminder = require("./models/billreminders.js")
 const session = require("express-session");
+const dotenv = require("dotenv");
 
-const User = require("./models/user.js"); 
-const verfyUser = require("./middlewares/authMiddleware.js");
-
-
+dotenv.config();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
@@ -37,7 +35,7 @@ main()
     });
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/budgetManagement");
+    await mongoose.connect(process.env.MONGO_URI);
 };
 
 const billReminder = require("./routes/billReminderRoute.js");

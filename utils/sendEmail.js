@@ -1,21 +1,28 @@
 const nodemailer = require("nodemailer");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const sendVerificationEmail = async (to, verificationLink) => {
+    const transporter = nodemailer.createTransport({
+        service: "gmail", 
+        auth: {
+            user: process.env.EMAIL_USER, 
+            pass: process.env.EMAIL_PASS, 
+        },
+    });
 
-const sendVerificationEmail = async (email, token) => {
-  const url = `${process.env.BASE_URL}/verify-email?token=${token}`;
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Verify Your Email",
-    html: `<p>Click the link to verify your email: <a href="${url}">Verify</a></p>`,
-  });
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: to,
+        subject: "Verify Your Email",
+        html: `<p>Click the link below to verify your email:</p>
+               <a href="${verificationLink}">${verificationLink}</a>`,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log("Verification email sent successfully");
+    } catch (error) {
+        console.error("Error sending verification email:", error);
+    }
 };
 
 module.exports = sendVerificationEmail;

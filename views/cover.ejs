@@ -4,15 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=], initial-scale=1.0">
     <title>Budget Management</title>
+    <link rel="stylesheet" href="/cover.css">
 </head>
 <body>
-    <h1>From here user will register or log in</h1>
-    <div>
+    <h1>Welcome to Budget Management</h1>
+    <p class="quote">"Do not save what is left after spending, but spend what is left after saving." – Warren Buffett</p>
+    <p class="quote">"A penny saved is a penny earned." – Benjamin Franklin</p>
+
+    <div class="cover-buttons">
         <% coverPages.forEach((page, index) => { %>
-            <form action="/<%= page %>" method="get" style="margin-bottom: 10px;">
+            <form action="/<%= page %>" method="get">
                 <button type="submit" class="<%= page %>"> <%= page.charAt(0).toUpperCase() + page.slice(1) %></button>
             </form>
         <% }); %>
+    </div>
+
+    <div class="info-section">
+        <h2>About This Project</h2>
+        <p>
+            Budget Management is a tool designed to help you take control of your finances. 
+            Whether you're saving for an emergency fund, tracking your expenses, or planning for future goals, 
+            this platform provides the tools you need to succeed.
+        </p>
+        <p>
+            Start your journey to financial freedom today. Remember, small savings today can lead to big rewards tomorrow!
+        </p>
+    </div>
+
+    <div class="graph-table-container">
+        <h2>Your Savings Progress</h2>
+        <div class="graph">
+            <span>40% Saved</span>
+        </div>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Target Amount</th>
+                <th>Saved Amount</th>
+                <th>Remaining</th>
+            </tr>
+            <tr>
+                <td>January</td>
+                <td>$1000</td>
+                <td>$400</td>
+                <td>$600</td>
+            </tr>
+            <tr>
+                <td>February</td>
+                <td>$1000</td>
+                <td>$500</td>
+                <td>$500</td>
+            </tr>
+            <tr>
+                <td>March</td>
+                <td>$1000</td>
+                <td>$700</td>
+                <td>$300</td>
+            </tr>
+        </table>
     </div>
 </body>
 </html>
