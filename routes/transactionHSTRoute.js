@@ -62,9 +62,15 @@ router.get("/transaction-history", verifyUser, async (req, res)=>{
           { upsert: true, new: true }
         );
       }
-      
-    const histories = await TransactionHST.find({userID: userID}); 
+    
+    try{
+      const histories = await TransactionHST.find({userID: userID}); 
       res.render("transactionHST.ejs", {histories, currentPage: 'transaction-history'});
+    }catch(error){
+      console.error("Something went wrong:", error.message);
+      res.redirect("/dashbord");
+    }
+
 });
 
 module.exports = router;
