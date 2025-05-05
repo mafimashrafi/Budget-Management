@@ -4,6 +4,7 @@ const router = express.Router();
 const Reminder = require('../models/billreminders');
 const verifyUser = require('../middlewares/authMiddleware');
 const User = require("../models/user.js");
+const sendEmail = require('../utils/emailService');
 
 router.get('/billReminder', verifyUser, async (req, res) => {
   const userID= req.userID;
@@ -22,7 +23,7 @@ router.post("/reminders/:id/add", verifyUser, async (req, res)=>{
   let formatedDate;
   if (reminderDate && reminderDate.trim() !== "") {
       const [day, month, year] = reminderDate.split(/[- /|:;,]/).map(Number);
-      formatedDate = new Date(year, month - 1, day);
+      formatedDate = new Date(Date.UTC(year, month - 1, day));
   
       if (isNaN(formatedDate.getTime())) {
           formatedDate = new Date(); 
@@ -38,7 +39,7 @@ router.post("/reminders/:id/add", verifyUser, async (req, res)=>{
     reminderDate: formatedDate,
   });
 
-  await newReminder.save().then(()=>{
+  await newReminder.save().then( async()=>{;
     res.redirect("/billReminder");
   }).catch((err)=>{
     console.log(err);
