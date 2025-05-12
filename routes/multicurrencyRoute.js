@@ -19,7 +19,8 @@ router.post("/multicurrency/convert", async (req, res) => {
       const result = response.data.conversion_result;
   
       res.render("multiCurrency.ejs", {
-        result: `${amount} ${from} = ${result} ${to}`
+        result: `${amount} ${from} = ${result} ${to}`,
+        currentPage : 'multicurrency'
       });
     } catch (err) {
       console.error(err);
